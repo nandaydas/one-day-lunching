@@ -35,6 +35,7 @@ import type {
 } from "@nimantro/types";
 import { AlponaCrest, AlponaDivider } from "./AlponaMotif";
 import { CountdownDisplay } from "./CountdownDisplay";
+import { resolveExperience } from "@/lib/experience";
 
 export interface PublicEventMeta {
   title?: string;
@@ -85,6 +86,7 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
   const title = resolveText(content, "title", locale);
   const subtitle = resolveText(content, "subtitle", locale);
   const artworkUrl = typeof content.artworkUrl === "string" ? content.artworkUrl : "";
+  const photoUrl = typeof content.photoUrl === "string" ? content.photoUrl : "";
   const brideName = resolveText(content, "brideName", locale);
   const groomName = resolveText(content, "groomName", locale);
   const primaryNames =
@@ -107,7 +109,21 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
   return (
     <div className="py-6 sm:py-10 space-y-5">
       <AlponaCrest className="w-32 h-10 mx-auto" />
-      {artworkUrl && (
+      {photoUrl ? (
+        <div
+          className="relative mx-auto w-[min(70%,260px)] aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-2xl border-4 shadow-xl inv-float"
+          style={{ borderColor: "var(--inv-secondary)" }}
+        >
+          <Image
+            src={photoUrl}
+            alt={primaryNames || "Couple photo"}
+            fill
+            unoptimized
+            sizes="260px"
+            className="object-cover inv-kenburns"
+          />
+        </div>
+      ) : artworkUrl && (
         <div className="relative mx-auto w-full max-w-[300px] aspect-[4/3] inv-kenburns">
           <Image
             src={artworkUrl}
@@ -150,7 +166,19 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
             fontFamily: "var(--inv-accent-font)",
           }}
         >
-          {primaryNames}
+          {/* word-by-word reveal; words (not letters) keep Bengali conjuncts intact */}
+          {primaryNames.split(" ").map((word, i) => (
+            <motion.span
+              key={`${word}-${i}`}
+              className="inline-block"
+              initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + i * 0.18, duration: 0.7 }}
+            >
+              {word}&nbsp;
+            </motion.span>
+          ))}
         </p>
       )}
       {(dateLabel || bangabda) && (
@@ -168,6 +196,25 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
         </div>
       )}
       <AlponaDivider />
+    </div>
+  );
+}
+
+function OrnateCorners() {
+  const corner = (
+    <svg viewBox="0 0 60 60" className="h-14 w-14" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M4 56V20Q4 4 20 4h36" />
+      <path d="M12 56V26q0-14 14-14h30" opacity=".6" />
+      <path d="M20 20c6-8 14-6 14 0s-8 8-14 0z" fill="currentColor" opacity=".8" />
+      <circle cx="8" cy="8" r="3" fill="currentColor" />
+    </svg>
+  );
+  return (
+    <div className="pointer-events-none absolute inset-0" style={{ color: "var(--inv-secondary)", zIndex: 2 }} aria-hidden="true">
+      <div className="absolute left-2 top-3">{corner}</div>
+      <div className="absolute right-2 top-3 -scale-x-100">{corner}</div>
+      <div className="absolute bottom-2 left-2 -scale-y-100">{corner}</div>
+      <div className="absolute bottom-2 right-2 -scale-x-100 -scale-y-100">{corner}</div>
     </div>
   );
 }
@@ -649,16 +696,15 @@ function GallerySection({ section, locale }: SectionRenderContext) {
   const images = Array.isArray(section.content.images)
     ? section.content.images.filter((v): v is string => typeof v === "string" && v.length > 0)
     : [];
+  const [open, setOpen] = React.useState<number | null>(null);
+  const tilt = [-3, 2, -1.5, 3, -2, 1.5];
 
   return (
-    <div className="space-y-4 max-w-xl mx-auto">
+    <div className="space-y-5 max-w-xl mx-auto">
       {heading && (
         <h2
           className="text-xl font-semibold"
-          style={{
-            color: "var(--inv-primary)",
-            fontFamily: "var(--inv-heading-font)",
-          }}
+          style={{ color: "var(--inv-primary)", fontFamily: "var(--inv-heading-font)" }}
         >
           {heading}
         </h2>
@@ -669,21 +715,31 @@ function GallerySection({ section, locale }: SectionRenderContext) {
         </p>
       )}
       {images.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4 px-1">
           {images.map((src, idx) => (
-            <div
+            <motion.button
+              type="button"
               key={`${src}-${idx}`}
-              className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border"
-              style={{ borderColor: "var(--inv-border)" }}
+              onClick={() => setOpen(idx)}
+              className={`relative rounded-sm bg-white p-2 pb-6 shadow-lg ${
+                images.length % 2 === 1 && idx === 0 ? "col-span-2" : ""
+              }`}
+              style={{ rotate: tilt[idx % tilt.length] }}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ rotate: 0, scale: 1.03 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: (idx % 4) * 0.12, duration: 0.6 }}
+              aria-label={`Open photo ${idx + 1}`}
             >
-              <Image
-                src={src}
-                alt={`${heading || "Gallery"} ${idx + 1}`}
-                fill
-                unoptimized
-                className="object-cover"
-              />
-            </div>
+              <span
+                className={`relative block w-full overflow-hidden ${
+                  images.length % 2 === 1 && idx === 0 ? "aspect-[16/10]" : "aspect-[4/5]"
+                }`}
+              >
+                <Image src={src} alt={`${heading || "Gallery"} ${idx + 1}`} fill unoptimized className="object-cover" />
+              </span>
+            </motion.button>
           ))}
         </div>
       ) : (
@@ -692,8 +748,53 @@ function GallerySection({ section, locale }: SectionRenderContext) {
           style={{ borderColor: "var(--inv-border)", color: "var(--inv-muted)" }}
         >
           {locale === "bn"
-            ? "গ্যালারির ছবি শীঘ্রই যোগ করা হবে"
-            : "Photos will appear here once uploaded"}
+            ? "এডিটরে ছবি আপলোড করুন — অতিথিরা খালি গ্যালারি দেখবেন না"
+            : "Upload photos in the editor — guests won't see an empty gallery"}
+        </div>
+      )}
+
+      {open !== null && (
+        <div
+          className="no-print fixed inset-0 z-[60] flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setOpen(null)}
+          role="dialog"
+          aria-label="Photo viewer"
+        >
+          <motion.div
+            key={open}
+            className="relative h-[80vh] w-full max-w-3xl"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35 }}
+          >
+            <Image src={images[open]} alt={`Photo ${open + 1}`} fill unoptimized className="object-contain" />
+          </motion.div>
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous photo"
+                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/20 px-3 py-2 text-2xl text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpen((open - 1 + images.length) % images.length);
+                }}
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                aria-label="Next photo"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/20 px-3 py-2 text-2xl text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpen((open + 1) % images.length);
+                }}
+              >
+                ›
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
@@ -849,6 +950,8 @@ export function InvitationRenderer({
     [design.theme]
   );
 
+  const experience = resolveExperience(design);
+
   const enabledSections = React.useMemo(
     () => getOrderedEnabledSections(design),
     [design]
@@ -869,7 +972,9 @@ export function InvitationRenderer({
         color: "var(--inv-text)",
         fontFamily: "var(--inv-body-font)",
       }}
-      className={`relative overflow-hidden rounded-2xl border shadow-elevated ${
+      data-pattern={experience.pattern}
+      data-frame={experience.frame}
+      className={`inv-card relative overflow-hidden rounded-2xl border shadow-elevated ${
         activeLocale === "bn" ? "lang-bn" : ""
       } ${className}`}
     >
@@ -881,6 +986,7 @@ export function InvitationRenderer({
         }}
         aria-hidden="true"
       />
+      {experience.frame === "ornate" && <OrnateCorners />}
 
       {/* Bilingual language toggle when invitation supports both */}
       {showLanguageToggle && design.language === "both" && (
@@ -926,6 +1032,14 @@ export function InvitationRenderer({
       {/* Sections stack */}
       <div className="px-5 sm:px-10 py-6 space-y-10">
         {enabledSections.map((section) => {
+          // Guests never see an empty gallery; the editor shows a placeholder instead
+          if (
+            interactive &&
+            section.type === "gallery" &&
+            !(Array.isArray(section.content.images) && section.content.images.length > 0)
+          ) {
+            return null;
+          }
           const SectionComp = SECTION_COMPONENTS[section.type];
           const motionConfig = getSectionMotionConfig(
             section.animation,

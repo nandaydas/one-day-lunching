@@ -34,6 +34,13 @@
     "bodyFont": "Hind Siliguri",
     "accentFont": "Tiro Bangla"
   },
+  "experience": {
+    "opening": "doors",
+    "effect": "fireflies",
+    "music": "flute",
+    "pattern": "stars",
+    "frame": "glow"
+  },
   "sections": [
     {
       "id": "hero",
@@ -153,10 +160,33 @@
       }
     },
     {
+      "id": "gallery",
+      "type": "gallery",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": {
+          "en": "Our Moments",
+          "bn": "আমাদের মুহূর্ত"
+        },
+        "caption": {
+          "en": "A few memories from our journey together",
+          "bn": "একসাথে পথচলার কিছু স্মৃতি"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 100
+      }
+    },
+    {
       "id": "family",
       "type": "family",
       "enabled": true,
-      "order": 3,
+      "order": 4,
       "defaultContent": {
         "heading": {
           "en": "Hosted With Love By",
@@ -183,7 +213,7 @@
       "id": "schedule",
       "type": "schedule",
       "enabled": true,
-      "order": 4,
+      "order": 5,
       "defaultContent": {
         "heading": {
           "en": "Ceremony Schedule",
@@ -218,7 +248,7 @@
       "id": "countdown",
       "type": "countdown",
       "enabled": true,
-      "order": 5,
+      "order": 6,
       "defaultContent": {
         "label": {
           "en": "Counting down to the wedding",
@@ -238,7 +268,7 @@
       "id": "venue",
       "type": "venue",
       "enabled": true,
-      "order": 6,
+      "order": 7,
       "defaultContent": {
         "heading": {
           "en": "Venue & Directions",
@@ -266,7 +296,7 @@
       "id": "rsvp",
       "type": "rsvp",
       "enabled": true,
-      "order": 7,
+      "order": 8,
       "defaultContent": {
         "heading": {
           "en": "Confirm Your Attendance",
@@ -288,7 +318,7 @@
       "id": "footer",
       "type": "footer",
       "enabled": true,
-      "order": 8,
+      "order": 9,
       "required": true,
       "defaultContent": {
         "closing": {

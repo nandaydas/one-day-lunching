@@ -744,6 +744,7 @@ export default function InvitationEditorPage() {
                 <SectionInspector
                   section={activeSection}
                   invitationLanguage={design.language}
+                  eventId={eventId}
                 />
               </div>
             </div>

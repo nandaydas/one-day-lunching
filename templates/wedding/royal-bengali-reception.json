@@ -4,11 +4,23 @@
   "name": "Royal Bengali Boubhat",
   "slug": "royal-bengali-reception",
   "category": "royal",
-  "eventCategories": ["wedding", "anniversary"],
-  "languages": ["en", "bn"],
+  "eventCategories": [
+    "wedding",
+    "anniversary"
+  ],
+  "languages": [
+    "en",
+    "bn"
+  ],
   "thumbnail": "/art/wedding-3d.jpg",
   "access": "free",
-  "tags": ["bengali", "royal", "boubhat", "reception", "gold"],
+  "tags": [
+    "bengali",
+    "royal",
+    "boubhat",
+    "reception",
+    "gold"
+  ],
   "theme": {
     "primary": "#6B1D2F",
     "secondary": "#C89D54",
@@ -21,6 +33,13 @@
     "bodyFont": "Hind Siliguri",
     "accentFont": "Noto Serif Bengali"
   },
+  "experience": {
+    "opening": "doors",
+    "effect": "sparkles",
+    "music": "sitar",
+    "pattern": "damask",
+    "frame": "ornate"
+  },
   "sections": [
     {
       "id": "hero",
@@ -30,14 +49,33 @@
       "required": true,
       "locked": false,
       "defaultContent": {
-        "title": { "en": "Reception & Boubhat", "bn": "শুভ বৌভাত ও প্রীতিভোজ" },
-        "subtitle": { "en": "Together with our families", "bn": "সাদর সম্ভাষণ" },
-        "primaryNames": { "en": "Arpita & Ritwik", "bn": "অর্পিতা ও ঋত্বিক" },
-        "dateLabel": { "en": "Sunday, 14 December 2026", "bn": "রবিবার, ১৪ই ডিসেম্বর ২০২৬" },
+        "title": {
+          "en": "Reception & Boubhat",
+          "bn": "শুভ বৌভাত ও প্রীতিভোজ"
+        },
+        "subtitle": {
+          "en": "Together with our families",
+          "bn": "সাদর সম্ভাষণ"
+        },
+        "primaryNames": {
+          "en": "Arpita & Ritwik",
+          "bn": "অর্পিতা ও ঋত্বিক"
+        },
+        "dateLabel": {
+          "en": "Sunday, 14 December 2026",
+          "bn": "রবিবার, ১৪ই ডিসেম্বর ২০২৬"
+        },
         "artworkUrl": "/art/wedding-3d.jpg"
       },
-      "style": { "alignment": "center", "backgroundColor": "#FBF6EE" },
-      "animation": { "preset": "envelope-open", "delay": 0, "duration": 800 }
+      "style": {
+        "alignment": "center",
+        "backgroundColor": "#FBF6EE"
+      },
+      "animation": {
+        "preset": "envelope-open",
+        "delay": 0,
+        "duration": 800
+      }
     },
     {
       "id": "welcome",
@@ -45,14 +83,22 @@
       "enabled": true,
       "order": 1,
       "defaultContent": {
-        "heading": { "en": "Cordial Invitation", "bn": "বিনীত নিবেদন" },
+        "heading": {
+          "en": "Cordial Invitation",
+          "bn": "বিনীত নিবেদন"
+        },
         "message": {
           "en": "Join us for an evening of warmth, music, and celebratory feast as we welcome the newlyweds home.",
           "bn": "নববধূকে বরণ করে নেওয়ার এই আনন্দময় সন্ধ্যায় আপনার সপরিবার উপস্থিতি আমাদের একান্ত কাম্য।"
         }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-up", "delay": 100 }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 100
+      }
     },
     {
       "id": "story",
@@ -61,110 +107,228 @@
       "order": 2,
       "defaultContent": {
         "storyType": "couple-journey",
-        "heading": { "en": "Our Journey Together", "bn": "আমাদের পথচলা" },
+        "heading": {
+          "en": "Our Journey Together",
+          "bn": "আমাদের পথচলা"
+        },
         "narrative": {
           "en": "A story built across shared music playlists, winter letters, and family laughter.",
           "bn": "বন্ধুত্ব, চিঠি আর পরিবারের ভালোবাসায় গড়া আমাদের গল্প।"
         },
-        "chapter1Tag": { "en": "Winter 2023", "bn": "শীত ২০২৩" },
-        "chapter1Title": { "en": "First Encounter", "bn": "প্রথম আলাপ" },
+        "chapter1Tag": {
+          "en": "Winter 2023",
+          "bn": "শীত ২০২৩"
+        },
+        "chapter1Title": {
+          "en": "First Encounter",
+          "bn": "প্রথম আলাপ"
+        },
         "chapter1Detail": {
           "en": "Introduced by college friends at a Rabindra Sangeet evening in South Kolkata.",
           "bn": "রবীন্দ্রসঙ্গীতের এক সন্ধ্যায় প্রিয় বন্ধুদের মাধ্যমে আমাদের প্রথম পরিচয়।"
         },
-        "chapter2Tag": { "en": "Autumn 2025", "bn": "শরৎ ২০২৫" },
-        "chapter2Title": { "en": "The Proposal", "bn": "জীবনের অঙ্গীকার" },
+        "chapter2Tag": {
+          "en": "Autumn 2025",
+          "bn": "শরৎ ২০২৫"
+        },
+        "chapter2Title": {
+          "en": "The Proposal",
+          "bn": "জীবনের অঙ্গীকার"
+        },
         "chapter2Detail": {
           "en": "Over sunset boat chimes by the Hooghly, we promised to walk together.",
           "bn": "গঙ্গার পাড়ে গোধূলি বেলায় সারাজীবন পাশে থাকার প্রতিশ্রুতি।"
         },
-        "chapter3Tag": { "en": "December 2026", "bn": "ডিসেম্বর ২০২৬" },
-        "chapter3Title": { "en": "Welcoming Home", "bn": "নতুন পরিবারের মিলন" },
+        "chapter3Tag": {
+          "en": "December 2026",
+          "bn": "ডিসেম্বর ২০২৬"
+        },
+        "chapter3Title": {
+          "en": "Welcoming Home",
+          "bn": "নতুন পরিবারের মিলন"
+        },
         "chapter3Detail": {
           "en": "Raising a toast to love, music, and timeless heritage with every guest.",
           "bn": "আপনাদের সবার উপস্থিতিতে আনন্দ সন্ধ্যা আরও উজ্জ্বল হয়ে উঠবে।"
         }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "scroll-reveal" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "scroll-reveal"
+      }
+    },
+    {
+      "id": "gallery",
+      "type": "gallery",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": {
+          "en": "Our Moments",
+          "bn": "আমাদের মুহূর্ত"
+        },
+        "caption": {
+          "en": "A few memories from our journey together",
+          "bn": "একসাথে পথচলার কিছু স্মৃতি"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 100
+      }
     },
     {
       "id": "family",
       "type": "family",
       "enabled": true,
-      "order": 3,
+      "order": 4,
       "defaultContent": {
-        "heading": { "en": "Hosted By", "bn": "নিমন্ত্রণকর্তা" },
-        "brideFamily": { "en": "Banerjee Family", "bn": "শ্রী দেবব্রত ও শ্রীমতী সুমিত্রা বন্দ্যোপাধ্যায়" },
-        "groomFamily": { "en": "Sengupta Family", "bn": "শ্রী প্রদীপ ও শ্রীমতী কাবেরী সেনগুপ্ত" }
+        "heading": {
+          "en": "Hosted By",
+          "bn": "নিমন্ত্রণকর্তা"
+        },
+        "brideFamily": {
+          "en": "Banerjee Family",
+          "bn": "শ্রী দেবব্রত ও শ্রীমতী সুমিত্রা বন্দ্যোপাধ্যায়"
+        },
+        "groomFamily": {
+          "en": "Sengupta Family",
+          "bn": "শ্রী প্রদীপ ও শ্রীমতী কাবেরী সেনগুপ্ত"
+        }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-up", "delay": 150 }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 150
+      }
     },
     {
       "id": "countdown",
       "type": "countdown",
       "enabled": true,
-      "order": 4,
+      "order": 5,
       "defaultContent": {
-        "label": { "en": "Counting down to the evening", "bn": "আনন্দ সন্ধ্যার প্রতীক্ষা" },
+        "label": {
+          "en": "Counting down to the evening",
+          "bn": "আনন্দ সন্ধ্যার প্রতীক্ষা"
+        },
         "targetDate": "2026-12-14T19:00"
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "scale-reveal" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "scale-reveal"
+      }
     },
     {
       "id": "schedule",
       "type": "schedule",
       "enabled": true,
-      "order": 5,
+      "order": 6,
       "defaultContent": {
-        "heading": { "en": "Evening Programme", "bn": "সন্ধ্যার সূচি" },
-        "item1Title": { "en": "Arrival & Warm Greetings", "bn": "আগমনী ও শুভেচ্ছা বিনিময়" },
-        "item1Time": { "en": "6:30 PM", "bn": "সন্ধ্যা ৬:৩০" },
-        "item2Title": { "en": "Grand Reception Dinner", "bn": "প্রীতিভোজ" },
-        "item2Time": { "en": "8:00 PM", "bn": "রাত ৮:০০" }
+        "heading": {
+          "en": "Evening Programme",
+          "bn": "সন্ধ্যার সূচি"
+        },
+        "item1Title": {
+          "en": "Arrival & Warm Greetings",
+          "bn": "আগমনী ও শুভেচ্ছা বিনিময়"
+        },
+        "item1Time": {
+          "en": "6:30 PM",
+          "bn": "সন্ধ্যা ৬:৩০"
+        },
+        "item2Title": {
+          "en": "Grand Reception Dinner",
+          "bn": "প্রীতিভোজ"
+        },
+        "item2Time": {
+          "en": "8:00 PM",
+          "bn": "রাত ৮:০০"
+        }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-up" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up"
+      }
     },
     {
       "id": "venue",
       "type": "venue",
       "enabled": true,
-      "order": 6,
+      "order": 7,
       "defaultContent": {
-        "heading": { "en": "Venue", "bn": "অনুষ্ঠানের স্থান" },
-        "venueName": { "en": "Raajkutir Heritage, Kolkata", "bn": "রাজকুটীর হেরিটেজ, কলকাতা" },
-        "address": { "en": "89C Narkeldanga Main Rd, Kolkata 700054", "bn": "৮৯সি মৌলানা আবুল কালাম আজাদ সরণি, কলকাতা" },
+        "heading": {
+          "en": "Venue",
+          "bn": "অনুষ্ঠানের স্থান"
+        },
+        "venueName": {
+          "en": "Raajkutir Heritage, Kolkata",
+          "bn": "রাজকুটীর হেরিটেজ, কলকাতা"
+        },
+        "address": {
+          "en": "89C Narkeldanga Main Rd, Kolkata 700054",
+          "bn": "৮৯সি মৌলানা আবুল কালাম আজাদ সরণি, কলকাতা"
+        },
         "mapsUrl": "https://maps.google.com/?q=Kolkata"
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-up" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up"
+      }
     },
     {
       "id": "rsvp",
       "type": "rsvp",
       "enabled": true,
-      "order": 7,
+      "order": 8,
       "defaultContent": {
-        "heading": { "en": "Confirm Attendance", "bn": "উপস্থিতি নিশ্চিত করুন" },
-        "description": { "en": "Kindly confirm how many members from your family will join.", "bn": "অনুগ্রহ করে আপনার পরিবারসহ আসন নিশ্চিত করুন।" }
+        "heading": {
+          "en": "Confirm Attendance",
+          "bn": "উপস্থিতি নিশ্চিত করুন"
+        },
+        "description": {
+          "en": "Kindly confirm how many members from your family will join.",
+          "bn": "অনুগ্রহ করে আপনার পরিবারসহ আসন নিশ্চিত করুন।"
+        }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-up" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up"
+      }
     },
     {
       "id": "footer",
       "type": "footer",
       "enabled": true,
-      "order": 8,
+      "order": 9,
       "required": true,
       "defaultContent": {
-        "closing": { "en": "We look forward to celebrating with you.", "bn": "আপনার সাদর উপস্থিতির অপেক্ষায় রইলাম।" }
+        "closing": {
+          "en": "We look forward to celebrating with you.",
+          "bn": "আপনার সাদর উপস্থিতির অপেক্ষায় রইলাম।"
+        }
       },
-      "style": { "alignment": "center" },
-      "animation": { "preset": "fade-in" }
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-in"
+      }
     }
   ]
 }

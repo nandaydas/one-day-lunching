@@ -97,6 +97,46 @@ export const TemplateSectionSchema = z.object({
 
 export type TemplateSection = z.infer<typeof TemplateSectionSchema>;
 
+// ─── Guest experience kit (opening, ambience, music, decor) ───
+
+export const OpeningStyleSchema = z.enum(["envelope", "curtain", "doors"]);
+export const AmbientEffectSchema = z.enum([
+  "marigold",
+  "roses",
+  "sparkles",
+  "fireflies",
+  "confetti",
+  "leaves",
+  "diyas",
+  "bubbles",
+  "none",
+]);
+export const MusicPresetSchema = z.enum(["shehnai", "sitar", "flute", "musicbox", "piano", "dhol"]);
+export const BackgroundPatternSchema = z.enum([
+  "none",
+  "alpona",
+  "damask",
+  "buti",
+  "stars",
+  "kantha",
+  "floral",
+  "dots",
+]);
+export const FrameStyleSchema = z.enum(["simple", "ornate", "stitched", "glow"]);
+
+export const TemplateExperienceSchema = z.object({
+  opening: OpeningStyleSchema.default("envelope"),
+  effect: AmbientEffectSchema.default("marigold"),
+  music: MusicPresetSchema.default("shehnai"),
+  pattern: BackgroundPatternSchema.default("none"),
+  frame: FrameStyleSchema.default("simple"),
+});
+
+export type TemplateExperience = z.infer<typeof TemplateExperienceSchema>;
+export type OpeningStyle = z.infer<typeof OpeningStyleSchema>;
+export type AmbientEffect = z.infer<typeof AmbientEffectSchema>;
+export type MusicPreset = z.infer<typeof MusicPresetSchema>;
+
 // ─── Complete template definition ────────────────────────────
 
 export const TemplateDefinitionSchema = z.object({
@@ -135,6 +175,7 @@ export const TemplateDefinitionSchema = z.object({
   access: z.enum(["free", "premium"]).default("free"),
   theme: TemplateThemeSchema,
   sections: z.array(TemplateSectionSchema).min(1),
+  experience: TemplateExperienceSchema.optional(),
   tags: z.array(z.string()).default([]),
   author: z.string().optional(),
   licence: z.string().optional(),

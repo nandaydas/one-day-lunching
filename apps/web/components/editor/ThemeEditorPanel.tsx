@@ -22,11 +22,26 @@ import {
   SelectValue,
 } from "@nimantro/ui";
 import { useLocale } from "@/hooks/useLocale";
+import { EXPERIENCE_OPTIONS, resolveExperience } from "@/lib/experience";
+import { MUSIC_PRESETS } from "@/lib/invite-music";
+
+const EXPERIENCE_FIELDS: {
+  key: keyof typeof EXPERIENCE_OPTIONS;
+  label: string;
+  names?: Record<string, string>;
+}[] = [
+  { key: "opening", label: "Opening animation", names: { envelope: "Envelope & wax seal", curtain: "Royal curtain", doors: "Carved doors" } },
+  { key: "music", label: "Music", names: Object.fromEntries(MUSIC_PRESETS.map((m) => [m.id, m.en])) },
+  { key: "effect", label: "Ambient effect", names: { marigold: "Marigold petals", roses: "Rose petals", sparkles: "Gold sparkles", fireflies: "Fireflies", confetti: "Confetti & balloons", leaves: "Falling leaves", diyas: "Floating diyas", bubbles: "Bubbles", none: "None" } },
+  { key: "pattern", label: "Background pattern" },
+  { key: "frame", label: "Card frame" },
+];
 
 const ALL_FONTS = [...SUPPORTED_BENGALI_FONTS, ...SUPPORTED_LATIN_FONTS];
 
 export function ThemeEditorPanel() {
   const { design, updateTheme, updateLanguage, updateMetadata, pushHistory } = useEditorStore();
+  const templateDefault = design ? resolveExperience({ ...design, metadata: {} }) : null;
   const { t } = useLocale();
   if (!design) return null;
 
@@ -131,30 +146,35 @@ export function ThemeEditorPanel() {
       </div>
 
       <div className="space-y-2 pt-2 border-t border-border">
-        <div className="space-y-1">
-          <Label className="text-xs">Opening animation</Label>
-          <Select
-            value={design.metadata?.opening || "auto"}
-            onValueChange={(v) => {
-              updateMetadata("opening", v === "auto" ? "" : v);
-              pushHistory("Change opening");
-            }}
-          >
-            <SelectTrigger className="h-9 text-xs">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="auto">Auto (by template)</SelectItem>
-              <SelectItem value="envelope">Envelope &amp; wax seal</SelectItem>
-              <SelectItem value="curtain">Royal curtain</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        {EXPERIENCE_FIELDS.map((field) => (
+          <div key={field.key} className="space-y-1">
+            <Label className="text-xs">{field.label}</Label>
+            <Select
+              value={design.metadata?.[field.key] || "auto"}
+              onValueChange={(v) => {
+                updateMetadata(field.key, v === "auto" ? "" : v);
+                pushHistory(`Change ${field.key}`);
+              }}
+            >
+              <SelectTrigger className="h-9 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="auto">Template default ({templateDefault?.[field.key]})</SelectItem>
+                {EXPERIENCE_OPTIONS[field.key].map((opt) => (
+                  <SelectItem key={opt} value={opt}>
+                    {field.names?.[opt] ?? opt}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        ))}
         <div className="space-y-1">
           <Label className="text-xs">Background music (MP3 link)</Label>
           <Input
             className="h-9 text-xs"
-            placeholder="Leave empty for built-in shehnai music"
+            placeholder="Optional: your own song instead of the built-in music"
             value={design.metadata?.musicUrl ?? ""}
             onChange={(e) => updateMetadata("musicUrl", e.target.value)}
             onBlur={() => pushHistory("Change music")}
