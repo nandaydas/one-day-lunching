@@ -143,16 +143,12 @@ export default function TemplatesPage() {
                 </div>
               </CardContent>
               <CardFooter className="px-4 pb-4 gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                  onClick={() => setPreviewTemplate(template)}
-                >
-                  <Eye className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
-                  Preview
-                </Button>
+                <Link href={`/demo/${template.slug}`} className="flex-1">
+                  <Button type="button" variant="outline" size="sm" className="w-full">
+                    <Eye className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+                    Live demo ♪
+                  </Button>
+                </Link>
                 <Link
                   href={`/dashboard/events/new?template=${template.id}`}
                   className="flex-1"

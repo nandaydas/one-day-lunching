@@ -76,11 +76,16 @@ export async function POST(request: NextRequest) {
   const groupRef = eventRef.collection("guestGroups").doc(groupId);
 
   await db.runTransaction(async (tx) => {
-    const [existingRsvp, eventDoc, groupDoc] = await Promise.all([
+    const [existingRsvp, eventDoc, groupDoc, ...guestDocs] = await Promise.all([
       tx.get(rsvpRef),
       tx.get(eventRef),
       tx.get(groupRef),
+      ...(memberResponses ?? []).map((mr) => tx.get(eventRef.collection("guests").doc(mr.guestId))),
     ]);
+    // A token may only update guests of its own household.
+    const ownGuestIds = new Set(
+      guestDocs.filter((d) => d.exists && d.data()?.groupId === groupId).map((d) => d.id)
+    );
 
     if (!eventDoc.exists) {
       throw new Error("Event not found.");
@@ -112,6 +117,7 @@ export async function POST(request: NextRequest) {
 
     if (memberResponses && memberResponses.length > 0) {
       for (const mr of memberResponses) {
+        if (!ownGuestIds.has(mr.guestId)) continue;
         tx.update(eventRef.collection("guests").doc(mr.guestId), {
           invitationStatus:
             status === "declined" ? "declined" : mr.attending ? "accepted" : "declined",

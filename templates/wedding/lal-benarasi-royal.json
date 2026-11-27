@@ -1,0 +1,307 @@
+{
+  "id": "lal-benarasi-royal-001",
+  "version": 1,
+  "name": "Lal Benarasi Royal",
+  "slug": "lal-benarasi-royal",
+  "category": "royal",
+  "eventCategories": [
+    "wedding"
+  ],
+  "languages": [
+    "en",
+    "bn"
+  ],
+  "thumbnail": "/art/lal-benarasi.svg",
+  "access": "free",
+  "tags": [
+    "bengali",
+    "royal",
+    "wedding",
+    "benarasi",
+    "topor",
+    "gold",
+    "crimson"
+  ],
+  "theme": {
+    "primary": "#9B111E",
+    "secondary": "#C8962E",
+    "background": "#FFF4E6",
+    "surface": "#FFFBF4",
+    "text": "#2A1410",
+    "muted": "#7D5E52",
+    "border": "#EBCF9A",
+    "headingFont": "Galada",
+    "bodyFont": "Hind Siliguri",
+    "accentFont": "Cormorant Garamond"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "enabled": true,
+      "order": 0,
+      "required": true,
+      "locked": false,
+      "defaultContent": {
+        "title": {
+          "en": "Shubho Bibaho",
+          "bn": "শুভ বিবাহ"
+        },
+        "subtitle": {
+          "en": "By the grace of Ma Durga, with the blessings of our elders",
+          "bn": "মা দুর্গার কৃপায় ও গুরুজনদের আশীর্বাদে"
+        },
+        "primaryNames": {
+          "en": "Rituparna & Anirban",
+          "bn": "ঋতুপর্ণা ও অনির্বাণ"
+        },
+        "dateLabel": {
+          "en": "Friday, 11 December 2026",
+          "bn": "শুক্রবার, ১১ই ডিসেম্বর ২০২৬"
+        },
+        "artworkUrl": "/art/lal-benarasi.svg"
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 0,
+        "duration": 700
+      }
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "enabled": true,
+      "order": 1,
+      "defaultContent": {
+        "heading": {
+          "en": "Cordial Invitation",
+          "bn": "সবিনয় নিবেদন"
+        },
+        "message": {
+          "en": "With folded hands and joyful hearts, we request the honour of your presence as our children tie the sacred knot.",
+          "bn": "সবিনয় নিবেদন, আমাদের সন্তানদের শুভ পরিণয় উপলক্ষে আপনার সপরিবার উপস্থিতি ও আশীর্বাদ প্রার্থনা করি।"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 150
+      }
+    },
+    {
+      "id": "story",
+      "type": "story",
+      "enabled": true,
+      "order": 2,
+      "defaultContent": {
+        "storyType": "ritual-heritage",
+        "heading": {
+          "en": "Sacred Wedding Rituals",
+          "bn": "শুভ বিবাহের আচার ও ঐতিহ্য"
+        },
+        "narrative": {
+          "en": "Three cherished moments rooted in Bengali tradition that bring both families together.",
+          "bn": "বাঙালি বিবাহের প্রতিটি চিরন্তন আচার দুই পরিবারের ভালোবাসার প্রতীক।"
+        },
+        "chapter1Tag": {
+          "en": "Morning",
+          "bn": "প্রভাতী আচার"
+        },
+        "chapter1Title": {
+          "en": "Gaye Holud & Mangal Kalash",
+          "bn": "গায়ে হলুদ ও মঙ্গল কলস"
+        },
+        "chapter1Detail": {
+          "en": "Fragrant turmeric blessings, brass conch shells, and red-bordered sarees celebrate an auspicious morning.",
+          "bn": "কাঁচা হলুদ, আম্রপল্লব ও শঙ্খধ্বনিতে বরণ করা হয় নবজীবনের শুভ সূচনা।"
+        },
+        "chapter2Tag": {
+          "en": "Evening",
+          "bn": "সন্ধ্যার লগ্ন"
+        },
+        "chapter2Title": {
+          "en": "Shubho Drishti & Mala Bodol",
+          "bn": "শুভদৃষ্টি ও মালাবদল"
+        },
+        "chapter2Detail": {
+          "en": "Behind fresh betel leaves, the couple shares their first ceremonial gaze before exchanging jasmine garlands.",
+          "bn": "পানপাতায় মুখ ঢেকে শুভদৃষ্টি এবং রজনীগন্ধার মালাবদলে হৃদয়ের মিলন।"
+        },
+        "chapter3Tag": {
+          "en": "Sacred Fire",
+          "bn": "সপ্তপদী"
+        },
+        "chapter3Title": {
+          "en": "Saptapadi & Sindoor Daan",
+          "bn": "সাতপাক ও সিঁদুরদান"
+        },
+        "chapter3Detail": {
+          "en": "Seven vows circled around the sacred fire sealed with crimson vermilion and elder blessings.",
+          "bn": "অগ্নিকে সাক্ষী রেখে সাতপাকে বাঁধা পড়া ও গুরুজনদের আশীর্বাদ গ্রহণ।"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "scroll-reveal"
+      }
+    },
+    {
+      "id": "family",
+      "type": "family",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": {
+          "en": "Hosted With Love By",
+          "bn": "নিমন্ত্রণকর্তা"
+        },
+        "brideFamily": {
+          "en": "Mrs. Mita & Mr. Subhasis Chatterjee",
+          "bn": "শ্রী শুভাশিস ও শ্রীমতী মিতা চট্টোপাধ্যায়"
+        },
+        "groomFamily": {
+          "en": "Mrs. Anjali & Mr. Debashis Mukherjee",
+          "bn": "শ্রী দেবাশিস ও শ্রীমতী অঞ্জলি মুখোপাধ্যায়"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 200
+      }
+    },
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "enabled": true,
+      "order": 4,
+      "defaultContent": {
+        "heading": {
+          "en": "Ceremony Schedule",
+          "bn": "অনুষ্ঠান সূচি"
+        },
+        "item1Title": {
+          "en": "Gaye Holud Ceremony",
+          "bn": "শুভ গায়ে হলুদ"
+        },
+        "item1Time": {
+          "en": "10:00 AM",
+          "bn": "সকাল ১০:০০ ঘটিকা"
+        },
+        "item2Title": {
+          "en": "Shubho Bibaho & Dinner",
+          "bn": "শুভ বিবাহ ও প্রীতিভোজ"
+        },
+        "item2Time": {
+          "en": "7:15 PM onwards",
+          "bn": "সন্ধ্যা ৭:১৫ ঘটিকা"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 250
+      }
+    },
+    {
+      "id": "countdown",
+      "type": "countdown",
+      "enabled": true,
+      "order": 5,
+      "defaultContent": {
+        "label": {
+          "en": "Counting down to the wedding",
+          "bn": "শুভ দিনের প্রতীক্ষা"
+        },
+        "targetDate": "2026-12-11T19:15"
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "scale-reveal",
+        "delay": 200
+      }
+    },
+    {
+      "id": "venue",
+      "type": "venue",
+      "enabled": true,
+      "order": 6,
+      "defaultContent": {
+        "heading": {
+          "en": "Venue & Directions",
+          "bn": "অনুষ্ঠানের স্থান"
+        },
+        "venueName": {
+          "en": "Sonar Tori Banquet, Salt Lake",
+          "bn": "সোনার তরী ব্যাঙ্কোয়েট, সল্টলেক"
+        },
+        "address": {
+          "en": "Sector II, Bidhannagar, Kolkata 700091",
+          "bn": "সেক্টর ২, বিধাননগর, কলকাতা ৭০০০৯১"
+        },
+        "mapsUrl": "https://maps.google.com/?q=Salt+Lake+Kolkata"
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up",
+        "delay": 250
+      }
+    },
+    {
+      "id": "rsvp",
+      "type": "rsvp",
+      "enabled": true,
+      "order": 7,
+      "defaultContent": {
+        "heading": {
+          "en": "Confirm Your Attendance",
+          "bn": "উপস্থিতি নিশ্চিত করুন"
+        },
+        "description": {
+          "en": "Please let us know how many family members will attend.",
+          "bn": "অনুগ্রহ করে আপনার সপরিবার আগমন নিশ্চিত করুন।"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-up"
+      }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "enabled": true,
+      "order": 8,
+      "required": true,
+      "defaultContent": {
+        "closing": {
+          "en": "Your presence and blessings will make our joy complete.",
+          "bn": "আপনাদের উপস্থিতি ও আশীর্বাদ আমাদের আনন্দকে পরিপূর্ণ করবে।"
+        }
+      },
+      "style": {
+        "alignment": "center"
+      },
+      "animation": {
+        "preset": "fade-in"
+      }
+    }
+  ]
+}

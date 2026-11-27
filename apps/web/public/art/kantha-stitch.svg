@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FBF3EC"/>
+  <g fill="none" stroke-linecap="round" stroke-width="3" stroke-dasharray="7 6">
+    <!-- outer stitched frame -->
+    <rect x="22" y="22" width="356" height="256" rx="18" stroke="#6E8B5B"/>
+    <!-- lotus -->
+    <path d="M200 210 C170 180 170 130 200 90 C230 130 230 180 200 210 Z" stroke="#B5553C"/>
+    <path d="M200 210 C160 200 130 170 125 130 C160 135 190 165 200 210 Z" stroke="#B5553C"/>
+    <path d="M200 210 C240 200 270 170 275 130 C240 135 210 165 200 210 Z" stroke="#B5553C"/>
+    <path d="M200 210 C150 215 110 200 90 175 C130 165 175 180 200 210 Z" stroke="#D98E5F"/>
+    <path d="M200 210 C250 215 290 200 310 175 C270 165 225 180 200 210 Z" stroke="#D98E5F"/>
+    <path d="M120 238 Q200 222 280 238" stroke="#6E8B5B"/>
+    <!-- paisleys -->
+    <path d="M70 95 C55 70 80 50 98 62 C112 72 104 96 84 102 C74 105 70 100 70 95 Z" stroke="#D98E5F"/>
+    <path d="M330 95 C345 70 320 50 302 62 C288 72 296 96 316 102 C326 105 330 100 330 95 Z" stroke="#D98E5F"/>
+  </g>
+  <g fill="#B5553C"><circle cx="200" cy="150" r="5"/><circle cx="84" cy="80" r="3"/><circle cx="316" cy="80" r="3"/></g>
+  <g fill="#6E8B5B"><circle cx="60" cy="230" r="3"/><circle cx="340" cy="230" r="3"/><circle cx="200" cy="60" r="3"/></g>
+</svg>

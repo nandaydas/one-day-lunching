@@ -10,7 +10,7 @@ import { LocaleProvider } from "@/hooks/useLocale";
 import "./globals.css";
 
 const GOOGLE_FONTS_URL =
-  "https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;700&family=Hind+Siliguri:wght@400;500;600&family=Lato:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Galada&family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600&family=Lato:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap";
 
 // ─── Metadata ─────────────────────────────────────────────────
 

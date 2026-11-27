@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="#22385A"/><stop offset="1" stop-color="#0F1B2D"/></radialGradient>
+    <radialGradient id="glow" r="50%"><stop offset="0" stop-color="#FFE2A0" stop-opacity=".9"/><stop offset="1" stop-color="#FFE2A0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sky)"/>
+  <g fill="#F5EBD7"><circle cx="40" cy="40" r="1.4"/><circle cx="90" cy="80" r="1"/><circle cx="330" cy="50" r="1.6"/><circle cx="360" cy="110" r="1"/><circle cx="250" cy="30" r="1"/><circle cx="140" cy="28" r="1.2"/><circle cx="60" cy="140" r="1"/><circle cx="300" cy="150" r="1.2"/></g>
+  <!-- moon -->
+  <circle cx="200" cy="90" r="46" fill="url(#glow)"/>
+  <path d="M215 58 A34 34 0 1 0 215 122 A26 26 0 1 1 215 58 Z" fill="#E6C47A"/>
+  <!-- hanging lanterns -->
+  <g stroke="#C08A3E" stroke-width="1.5">
+    <line x1="80" y1="0" x2="80" y2="70"/><line x1="320" y1="0" x2="320" y2="90"/><line x1="130" y1="0" x2="130" y2="40"/><line x1="270" y1="0" x2="270" y2="50"/>
+  </g>
+  <g fill="#E6C47A">
+    <circle cx="80" cy="80" r="22" fill="url(#glow)"/><path d="M70 70 h20 l4 10 -4 10 h-20 l-4 -10 z"/>
+    <circle cx="320" cy="100" r="22" fill="url(#glow)"/><path d="M310 90 h20 l4 10 -4 10 h-20 l-4 -10 z"/>
+    <circle cx="130" cy="47" r="5"/><circle cx="270" cy="57" r="5"/>
+  </g>
+  <!-- rajanigandha stems -->
+  <g stroke="#7FA27A" stroke-width="2.5" fill="none">
+    <path d="M150 300 Q156 230 168 175"/><path d="M200 300 L200 165"/><path d="M250 300 Q244 230 232 175"/>
+  </g>
+  <g fill="#FBF6EA">
+    <ellipse cx="168" cy="172" rx="4" ry="8"/><ellipse cx="164" cy="190" rx="4" ry="7" transform="rotate(-25 164 190)"/><ellipse cx="172" cy="200" rx="4" ry="7" transform="rotate(25 172 200)"/><ellipse cx="160" cy="215" rx="4" ry="7" transform="rotate(-25 160 215)"/>
+    <ellipse cx="200" cy="160" rx="4" ry="9"/><ellipse cx="195" cy="180" rx="4" ry="7" transform="rotate(-25 195 180)"/><ellipse cx="205" cy="192" rx="4" ry="7" transform="rotate(25 205 192)"/><ellipse cx="195" cy="206" rx="4" ry="7" transform="rotate(-25 195 206)"/><ellipse cx="205" cy="220" rx="4" ry="7" transform="rotate(25 205 220)"/>
+    <ellipse cx="232" cy="172" rx="4" ry="8"/><ellipse cx="236" cy="190" rx="4" ry="7" transform="rotate(25 236 190)"/><ellipse cx="228" cy="200" rx="4" ry="7" transform="rotate(-25 228 200)"/><ellipse cx="240" cy="215" rx="4" ry="7" transform="rotate(25 240 215)"/>
+  </g>
+</svg>

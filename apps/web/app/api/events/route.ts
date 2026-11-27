@@ -115,6 +115,8 @@ export async function POST(request: NextRequest) {
             bn: hostNames.join(" ও "),
             en: hostNames.join(" & "),
           },
+          // empty → renderer formats the real event date instead of the template's sample date
+          dateLabel: { bn: "", en: "" },
         },
         countdown: {
           targetDate: startAt.slice(0, 16),

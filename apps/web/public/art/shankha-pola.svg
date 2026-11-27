@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDF8"/>
+  <g fill="none" stroke-linecap="round">
+    <!-- left pair: shankha (white) with pola (red) -->
+    <g transform="translate(150 150) rotate(-12)">
+      <ellipse rx="86" ry="86" stroke="#EDE6DA" stroke-width="18"/>
+      <ellipse rx="86" ry="86" stroke="#FFFFFF" stroke-width="12"/>
+      <ellipse rx="86" ry="86" stroke="#D9CFC0" stroke-width="1.5" stroke-dasharray="3 7"/>
+      <ellipse rx="66" ry="66" stroke="#C1121F" stroke-width="12"/>
+      <ellipse rx="66" ry="66" stroke="#E0B04A" stroke-width="1.5"/>
+    </g>
+    <g transform="translate(252 150) rotate(12)">
+      <ellipse rx="86" ry="86" stroke="#EDE6DA" stroke-width="18"/>
+      <ellipse rx="86" ry="86" stroke="#FFFFFF" stroke-width="12"/>
+      <ellipse rx="86" ry="86" stroke="#D9CFC0" stroke-width="1.5" stroke-dasharray="3 7"/>
+      <ellipse rx="66" ry="66" stroke="#C1121F" stroke-width="12"/>
+      <ellipse rx="66" ry="66" stroke="#E0B04A" stroke-width="1.5"/>
+    </g>
+  </g>
+  <!-- sindoor dot -->
+  <circle cx="201" cy="150" r="9" fill="#C1121F"/>
+  <circle cx="201" cy="150" r="3.5" fill="#FFFDF8"/>
+</svg>

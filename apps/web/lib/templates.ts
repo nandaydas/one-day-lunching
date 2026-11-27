@@ -15,10 +15,18 @@ import floralEngagementJson from "../../../templates/engagement/ring-ceremony-fl
 import modernBirthdayJson from "../../../templates/birthday/shubho-jonmodin-modern.json";
 import grihaPraveshJson from "../../../templates/housewarming/griha-pravesh-warm.json";
 import annaprashanJson from "../../../templates/religious/annaprashan-blessings.json";
+import lalBenarasiJson from "../../../templates/wedding/lal-benarasi-royal.json";
+import shankhaPolaJson from "../../../templates/wedding/shankha-pola-minimal.json";
+import rajanigandhaJson from "../../../templates/wedding/rajanigandha-night.json";
+import kanthaStitchJson from "../../../templates/wedding/kantha-stitch-floral.json";
 
 export const BUNDLED_TEMPLATES: TemplateDefinition[] = [
   bengaliWeddingJson,
   royalReceptionJson,
+  lalBenarasiJson,
+  shankhaPolaJson,
+  rajanigandhaJson,
+  kanthaStitchJson,
   floralEngagementJson,
   modernBirthdayJson,
   grihaPraveshJson,
