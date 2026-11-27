@@ -1,0 +1,31 @@
+{
+  "name": "@nimantro/guest-management",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "type-check": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nimantro/types": "workspace:*",
+    "@nimantro/validation": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

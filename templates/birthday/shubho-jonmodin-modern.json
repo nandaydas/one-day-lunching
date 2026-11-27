@@ -1,0 +1,157 @@
+{
+  "id": "shubho-jonmodin-modern-001",
+  "version": 1,
+  "name": "Shubho Jonmodin Celebration",
+  "slug": "shubho-jonmodin-modern",
+  "category": "modern",
+  "eventCategories": ["birthday"],
+  "languages": ["en", "bn"],
+  "thumbnail": "/art/birthday-3d.jpg",
+  "access": "free",
+  "tags": ["birthday", "jonmodin", "modern", "kids", "family"],
+  "theme": {
+    "primary": "#C04828",
+    "secondary": "#E3A83B",
+    "background": "#FFFDF7",
+    "surface": "#FFFFFF",
+    "text": "#231F20",
+    "muted": "#726B67",
+    "border": "#F0DFC8",
+    "headingFont": "Playfair Display",
+    "bodyFont": "Hind Siliguri",
+    "accentFont": "Anek Bangla"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "enabled": true,
+      "order": 0,
+      "required": true,
+      "locked": false,
+      "defaultContent": {
+        "title": { "en": "Birthday Celebration", "bn": "শুভ জন্মদিন" },
+        "subtitle": { "en": "Come celebrate a joyful milestone", "bn": "আনন্দ ও কেক কাটার সন্ধ্যায় নিমন্ত্রণ" },
+        "primaryNames": { "en": "Ayaan Turns Five", "bn": "আয়ান-এর ৫ম জন্মদিন" },
+        "dateLabel": { "en": "Saturday, 5 December 2026", "bn": "শনিবার, ৫ই ডিসেম্বর ২০২৬" },
+        "artworkUrl": "/art/birthday-3d.jpg"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "scale-reveal", "duration": 700 }
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "enabled": true,
+      "order": 1,
+      "defaultContent": {
+        "heading": { "en": "Join the Party", "bn": "সাদর আমন্ত্রণ" },
+        "message": {
+          "en": "Join us for lawn games, music, birthday cake, and dinner as we celebrate Ayaan turning five.",
+          "bn": "আয়ানের জন্মদিনের আনন্দঘন সন্ধ্যায় ছোট্ট বন্ধুদের ও পরিবারের সকলকে জানাই সাদর আমন্ত্রণ।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "story",
+      "type": "story",
+      "enabled": true,
+      "order": 2,
+      "defaultContent": {
+        "storyType": "milestone-chapters",
+        "heading": { "en": "Five Joyful Years", "bn": "আয়ানের পাঁচটি রঙিন বছর" },
+        "narrative": {
+          "en": "Highlights from Ayaan's favorite adventures leading up to his fifth candle.",
+          "bn": "পাঁচ বছরে পা দেওয়ার আগে আয়ানের সবচেয়ে প্রিয় কিছু মুহূর্ত।"
+        },
+        "chapter1Tag": { "en": "Age 01", "bn": "বয়স ১" },
+        "chapter1Title": { "en": "First Steps", "bn": "প্রথম হাঁটা শেখা" },
+        "chapter1Detail": {
+          "en": "Wobbly courtyard footsteps chasing paper airplanes and morning sparrows.",
+          "bn": "উঠোনে পাখির পেছনে দৌড়ে চলা প্রথম পা ফেলা।"
+        },
+        "chapter2Tag": { "en": "Age 03", "bn": "বয়স ৩" },
+        "chapter2Title": { "en": "Crayons & Tunes", "bn": "রংতুলি ও গান" },
+        "chapter2Detail": {
+          "en": "Sketchbooks full of trains, elephants, and Grandpa's bedtime stories.",
+          "bn": "খাতা ভরে আঁকা রেলগাড়ি আর দাদুর কাছে শোনা রূপকথার গল্প।"
+        },
+        "chapter3Tag": { "en": "Age 05", "bn": "বয়স ৫" },
+        "chapter3Title": { "en": "Ready for School", "bn": "বড় হয়ে ওঠা" },
+        "chapter3Detail": {
+          "en": "Curious questions all day long and saving the biggest slice of payesh and cake.",
+          "bn": "নতুন বন্ধু, মজার প্রশ্ন আর জন্মদিনের পায়েস ও কেকের উৎসব।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "scroll-reveal" }
+    },
+    {
+      "id": "countdown",
+      "type": "countdown",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "label": { "en": "Party countdown", "bn": "জন্মদিনের বাকি" },
+        "targetDate": "2026-12-05T17:30"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "countdown-transition" }
+    },
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "enabled": true,
+      "order": 4,
+      "defaultContent": {
+        "heading": { "en": "Party Highlights", "bn": "অনুষ্ঠানের সময়সূচি" },
+        "item1Title": { "en": "Games & Cake Cutting", "bn": "খেলাধুলা ও কেক কাটা" },
+        "item1Time": { "en": "5:30 PM", "bn": "বিকেল ৫:৩০" },
+        "item2Title": { "en": "Family Dinner", "bn": "রাতের ভোজ" },
+        "item2Time": { "en": "8:00 PM", "bn": "রাত ৮:০০" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "venue",
+      "type": "venue",
+      "enabled": true,
+      "order": 5,
+      "defaultContent": {
+        "heading": { "en": "Location", "bn": "ঠিকানা" },
+        "venueName": { "en": "Club Pavilion, New Town", "bn": "ক্লাব প্যাভিলিয়ন, নিউ টাউন" },
+        "address": { "en": "Action Area I, New Town, Kolkata", "bn": "অ্যাকশন এরিয়া ১, নিউ টাউন, কলকাতা" },
+        "mapsUrl": "https://maps.google.com/?q=New+Town+Kolkata"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "rsvp",
+      "type": "rsvp",
+      "enabled": true,
+      "order": 6,
+      "defaultContent": {
+        "heading": { "en": "Confirm Your Presence", "bn": "উপস্থিতি জানান" },
+        "description": { "en": "Let us know how many adults and kids are joining.", "bn": "অনুগ্রহ করে বড় ও শিশুদের সংখ্যা জানান।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "enabled": true,
+      "order": 7,
+      "required": true,
+      "defaultContent": {
+        "closing": { "en": "Warm wishes and bright smiles await you.", "bn": "সবার সাথে আনন্দে ভরে উঠুক সন্ধ্যা।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-in" }
+    }
+  ]
+}

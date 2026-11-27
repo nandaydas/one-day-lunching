@@ -1,0 +1,39 @@
+{
+  "name": "@nimantro/firebase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "require": "./dist/client.cjs"
+    },
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "import": "./dist/admin.js",
+      "require": "./dist/admin.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/client.ts src/admin.ts --format esm,cjs --dts --external firebase --external firebase-admin",
+    "dev": "tsup src/index.ts src/client.ts src/admin.ts --format esm,cjs --dts --watch --external firebase --external firebase-admin",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "firebase": "^11.1.0",
+    "firebase-admin": "^13.0.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  }
+}

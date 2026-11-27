@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# Environment & Secrets (NEVER commit credentials)
+.env
+.env.local
+.env.*.local
+*-firebase-adminsdk-*.json
+service-account*.json
+key.json
+
+# Firebase Emulators & Debug
+.firebase/
+firebase/emulator-data/
+firebase-debug.log
+firebase-debug.*.log
+firestore-debug.log
+ui-debug.log
+pubsub-debug.log
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

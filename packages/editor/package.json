@@ -1,0 +1,32 @@
+{
+  "name": "@nimantro/editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "type-check": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@nimantro/types": "workspace:*",
+    "@nimantro/template-schema": "workspace:*",
+    "zustand": "^5.0.2",
+    "immer": "^10.1.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

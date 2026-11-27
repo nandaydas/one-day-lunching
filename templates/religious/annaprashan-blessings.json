@@ -1,0 +1,158 @@
+{
+  "id": "annaprashan-blessings-001",
+  "version": 1,
+  "name": "Shubho Annaprashan Cultural",
+  "slug": "annaprashan-blessings",
+  "category": "cultural",
+  "eventCategories": ["annaprashan", "religious_ceremony", "puja_festival"],
+  "languages": ["en", "bn"],
+  "thumbnail": "/art/cultural-3d.jpg",
+  "access": "free",
+  "tags": ["annaprashan", "mukhebhat", "cultural", "bengali", "ceremony"],
+  "theme": {
+    "primary": "#B02A2A",
+    "secondary": "#E2A63B",
+    "background": "#FFF9EE",
+    "surface": "#FFFFFF",
+    "text": "#231919",
+    "muted": "#7A6A63",
+    "border": "#EBD7B7",
+    "headingFont": "Playfair Display",
+    "bodyFont": "Hind Siliguri",
+    "accentFont": "Noto Serif Bengali"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "enabled": true,
+      "order": 0,
+      "required": true,
+      "locked": false,
+      "defaultContent": {
+        "title": { "en": "Shubho Annaprashan", "bn": "শুভ অন্নপ্রাশন" },
+        "subtitle": { "en": "First Rice Ceremony & Blessings", "bn": "সাদর আমন্ত্রণ ও আশীর্বাদ প্রার্থনা" },
+        "primaryNames": { "en": "Baby Rai's Annaprashan", "bn": "শিশু রাই-এর মুখেভাত" },
+        "dateLabel": { "en": "Friday, 18 December 2026", "bn": "শুক্রবার, ১৮ই ডিসেম্বর ২০২৬" },
+        "artworkUrl": "/art/cultural-3d.jpg"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "enabled": true,
+      "order": 1,
+      "defaultContent": {
+        "heading": { "en": "Seeking Your Blessings", "bn": "আশীর্বাদ প্রার্থনা" },
+        "message": {
+          "en": "Join us to shower blessings on our little one as she takes her very first ceremonial taste of rice.",
+          "bn": "আমাদের ছোট্ট সোনার প্রথম অন্নগ্রহণ অনুষ্ঠানে আপনাদের সকলের সস্নেহ উপস্থিতি ও মঙ্গল কামনা একান্ত প্রার্থনীয়।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "story",
+      "type": "story",
+      "enabled": true,
+      "order": 2,
+      "defaultContent": {
+        "storyType": "milestone-chapters",
+        "heading": { "en": "Rai's First Six Months", "bn": "রাই-এর প্রথম ছয় মাস" },
+        "narrative": {
+          "en": "Tiny footsteps toward a cherished Bengali ritual where elders feed payesh with a silver spoon.",
+          "bn": "বাঙালি ঐতিহ্য অনুযায়ী মায়ের কোল থেকে সোনার চামচে প্রথম পায়েস খাওয়ার আনন্দময় পথচলা।"
+        },
+        "chapter1Tag": { "en": "Month 01", "bn": "প্রথম মাস" },
+        "chapter1Title": { "en": "First Lullabies", "bn": "প্রথম ঘুমপাড়ানি গান" },
+        "chapter1Detail": {
+          "en": "Born in monsoon rain, bringing warmth and quiet wonder into the Ghosh home.",
+          "bn": "শ্রাবণের বৃষ্টিতে পরিবারের নতুন আলোর কণা হয়ে আগমন।"
+        },
+        "chapter2Tag": { "en": "Month 04", "bn": "চতুর্থ মাস" },
+        "chapter2Title": { "en": "Social Smiles", "bn": "মিষ্টি হাসি" },
+        "chapter2Detail": {
+          "en": "Curious eyes tracking brass wind chimes and joyful giggles with Dadu and Thakuma.",
+          "bn": "দাদু-ঠাকুমার কোলে চড়ে খিলখিল হাসি আর গল্প শোনা।"
+        },
+        "chapter3Tag": { "en": "Month 06", "bn": "ষষ্ঠ মাস" },
+        "chapter3Title": { "en": "Mukhebhat Ritual", "bn": "শুভ মুখেভাত" },
+        "chapter3Detail": {
+          "en": "Mama feeds the first spoon of warm payesh followed by traditional book, coin, and pen blessings.",
+          "bn": "মামার হাতের প্রথম পায়েস আর বই, কলম ও আশীর্বাদের পবিত্র খেলা।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "scroll-reveal" }
+    },
+    {
+      "id": "family",
+      "type": "family",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": { "en": "With Love From", "bn": "নিমন্ত্রণকর্তা" },
+        "brideFamily": { "en": "Parents: Tanushree & Souvik Ghosh", "bn": "মাতা-পিতা: তনুশ্রী ও শৌভিক ঘোষ" },
+        "groomFamily": { "en": "Grandparents: Amarendra & Mala Ghosh", "bn": "দাদু-ঠাকুমা: শ্রী অমরেন্দ্র ও শ্রীমতী মালা ঘোষ" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "enabled": true,
+      "order": 4,
+      "defaultContent": {
+        "heading": { "en": "Ceremony Schedule", "bn": "অনুষ্ঠান সূচি" },
+        "item1Title": { "en": "Annaprashan Ritual & Blessings", "bn": "শুভ মুখেভাত ও আশীর্বাদ" },
+        "item1Time": { "en": "11:30 AM", "bn": "সকাল ১১:৩০" },
+        "item2Title": { "en": "Festive Bengali Lunch", "bn": "মধ্যাহ্নভোজ" },
+        "item2Time": { "en": "1:15 PM", "bn": "দুপুর ১:১৫" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "venue",
+      "type": "venue",
+      "enabled": true,
+      "order": 5,
+      "defaultContent": {
+        "heading": { "en": "Venue", "bn": "অনুষ্ঠানের স্থান" },
+        "venueName": { "en": "Ashirbad Bhavan, Howrah", "bn": "আশীর্বাদ ভবন, হাওড়া" },
+        "address": { "en": "Shibpur, Howrah 711102", "bn": "শিবপুর, হাওড়া ৭১১১০২" },
+        "mapsUrl": "https://maps.google.com/?q=Shibpur+Howrah"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "rsvp",
+      "type": "rsvp",
+      "enabled": true,
+      "order": 6,
+      "defaultContent": {
+        "heading": { "en": "Confirm Attendance", "bn": "উপস্থিতি নিশ্চিত করুন" },
+        "description": { "en": "Please let us know how many family members will attend.", "bn": "অনুগ্রহ করে আপনার সপরিবার উপস্থিতি জানান।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "enabled": true,
+      "order": 7,
+      "required": true,
+      "defaultContent": {
+        "closing": { "en": "With gratitude and love, the Ghosh Family.", "bn": "সবার স্নেহ ও আশীর্বাদে ভরে উঠুক রাই-এর জীবন।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-in" }
+    }
+  ]
+}

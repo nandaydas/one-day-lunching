@@ -1,0 +1,226 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helper functions ──────────────────────────────────────
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.admin == true;
+    }
+
+    function isEventOwner(eventId) {
+      return signedIn()
+        && get(/databases/$(database)/documents/events/$(eventId)).data.ownerId == uid();
+    }
+
+    function isEventMember(eventId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/events/$(eventId)/members/$(uid()));
+    }
+
+    function getEventMember(eventId) {
+      return get(/databases/$(database)/documents/events/$(eventId)/members/$(uid())).data;
+    }
+
+    function hasEventPermission(eventId, permission) {
+      return isEventOwner(eventId)
+        || (isEventMember(eventId)
+            && permission in getEventMember(eventId).permissions);
+    }
+
+    function canManageGuests(eventId) {
+      return hasEventPermission(eventId, "manage_guests")
+        || isEventOwner(eventId);
+    }
+
+    function canManageInvitations(eventId) {
+      return hasEventPermission(eventId, "manage_invitations")
+        || isEventOwner(eventId);
+    }
+
+    function isValidTimestamp(value) {
+      return value is timestamp;
+    }
+
+    function notChanging(field) {
+      return !(field in request.resource.data)
+        || request.resource.data[field] == resource.data[field];
+    }
+
+    // ─── Users ──────────────────────────────────────────────────
+
+    match /users/{userId} {
+      allow read: if signedIn() && uid() == userId;
+      allow create: if signedIn()
+        && uid() == userId
+        && request.resource.data.uid == userId
+        && request.resource.data.accountStatus == "active"
+        && request.resource.data.role == "user";
+      allow update: if signedIn()
+        && uid() == userId
+        && notChanging("uid")
+        && notChanging("email")
+        && notChanging("role")
+        && notChanging("accountStatus");
+      allow delete: if false; // Account deletion via Cloud Function only
+    }
+
+    // ─── Events ─────────────────────────────────────────────────
+
+    match /events/{eventId} {
+      allow read: if signedIn()
+        && (resource.data.ownerId == uid()
+            || isEventMember(eventId));
+
+      allow create: if signedIn()
+        && request.resource.data.ownerId == uid()
+        && request.resource.data.status in ["draft"]
+        && request.resource.data.invitationCount == 0
+        && request.resource.data.guestGroupCount == 0
+        && request.resource.data.invitedPersonCount == 0
+        && request.resource.data.confirmedPersonCount == 0;
+
+      allow update: if signedIn()
+        && resource.data.ownerId == uid()
+        && notChanging("ownerId")
+        && notChanging("invitationCount")
+        && notChanging("guestGroupCount")
+        && notChanging("invitedPersonCount")
+        && notChanging("confirmedPersonCount");
+
+      allow delete: if false; // Deletion via Cloud Function only (cascades subcollections)
+
+      // ─── Event members ──────────────────────────────────────
+
+      match /members/{memberId} {
+        allow read: if signedIn() && isEventMember(eventId);
+        allow write: if isEventOwner(eventId);
+      }
+
+      // ─── Event sessions ─────────────────────────────────────
+
+      match /sessions/{sessionId} {
+        allow read: if signedIn() && (isEventOwner(eventId) || isEventMember(eventId));
+        allow write: if isEventOwner(eventId);
+      }
+
+      // ─── Invitations ─────────────────────────────────────────
+
+      match /invitations/{invitationId} {
+        allow read: if signedIn() && (isEventOwner(eventId) || isEventMember(eventId));
+        allow create, update: if signedIn() && canManageInvitations(eventId);
+        allow delete: if isEventOwner(eventId);
+      }
+
+      // ─── Invitation versions (immutable published snapshots) ──
+
+      match /invitationVersions/{versionId} {
+        allow read: if signedIn() && (isEventOwner(eventId) || isEventMember(eventId));
+        allow write: if false; // Created only by trusted Cloud Functions
+      }
+
+      // ─── Guest groups ────────────────────────────────────────
+
+      match /guestGroups/{groupId} {
+        allow read: if signedIn() && canManageGuests(eventId);
+        allow create, update: if signedIn() && canManageGuests(eventId);
+        allow delete: if isEventOwner(eventId);
+      }
+
+      // ─── Guests ──────────────────────────────────────────────
+
+      match /guests/{guestId} {
+        allow read: if signedIn() && canManageGuests(eventId);
+        allow create, update: if signedIn() && canManageGuests(eventId);
+        allow delete: if signedIn() && canManageGuests(eventId);
+      }
+
+      // ─── Guest invitations ───────────────────────────────────
+
+      match /guestInvitations/{guestInvitationId} {
+        allow read: if signedIn() && canManageGuests(eventId);
+        allow write: if false; // Managed only by trusted Cloud Functions
+      }
+
+      // ─── RSVPs ───────────────────────────────────────────────
+
+      match /rsvps/{rsvpId} {
+        allow read: if signedIn() && canManageGuests(eventId);
+        allow write: if false; // RSVP submissions go through Cloud Functions
+      }
+
+      // ─── Check-ins ───────────────────────────────────────────
+
+      match /checkIns/{checkInId} {
+        allow read: if signedIn() && (isEventOwner(eventId) || isEventMember(eventId));
+        allow write: if false; // Managed by trusted Cloud Functions
+      }
+
+      // ─── Audit logs ──────────────────────────────────────────
+
+      match /auditLogs/{logId} {
+        allow read: if isEventOwner(eventId);
+        allow write: if false; // Written only by trusted Cloud Functions
+      }
+    }
+
+    // ─── Templates ──────────────────────────────────────────────
+
+    match /templates/{templateId} {
+      allow read: if resource.data.status == "published";
+      allow write: if isAdmin();
+
+      match /versions/{versionId} {
+        allow read: if get(/databases/$(database)/documents/templates/$(templateId)).data.status == "published";
+        allow write: if isAdmin();
+      }
+    }
+
+    // ─── Slugs (uniqueness registry) ────────────────────────────
+
+    match /slugs/{slug} {
+      allow read: if true; // Public slug check
+      allow write: if false; // Managed by trusted Cloud Functions
+    }
+
+    // ─── Exports ─────────────────────────────────────────────────
+
+    match /exports/{exportId} {
+      allow read: if signedIn() && resource.data.userId == uid();
+      allow write: if false; // Managed by trusted Cloud Functions and workers
+    }
+
+    // ─── Notifications ───────────────────────────────────────────
+
+    match /notifications/{notificationId} {
+      allow read: if signedIn() && resource.data.userId == uid();
+      allow update: if signedIn()
+        && resource.data.userId == uid()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["read"]);
+      allow write: if false;
+    }
+
+    // ─── Subscription accounts ───────────────────────────────────
+
+    match /subscriptionAccounts/{userId} {
+      allow read: if signedIn() && uid() == userId;
+      allow write: if false; // Updated by payment webhooks via trusted functions
+    }
+
+    // ─── Default deny ────────────────────────────────────────────
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

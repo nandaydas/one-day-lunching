@@ -1,0 +1,11 @@
+/* Import shared design system */
+@import "@nimantro/ui/styles";
+
+:root {
+  --font-noto-serif-bengali: "Noto Serif Bengali";
+  --font-noto-sans-bengali: "Noto Sans Bengali";
+  --font-hind-siliguri: "Hind Siliguri";
+  --font-anek-bangla: "Anek Bangla";
+  --font-playfair: "Playfair Display";
+  --font-lato: "Lato";
+}

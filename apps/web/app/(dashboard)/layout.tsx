@@ -1,0 +1,14 @@
+// ============================================================
+// Nimantro — Dashboard Layout
+// apps/web/app/(dashboard)/layout.tsx
+// ============================================================
+
+import { DashboardShell } from "@/components/layout/DashboardShell";
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <DashboardShell>{children}</DashboardShell>;
+}

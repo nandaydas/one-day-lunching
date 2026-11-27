@@ -1,0 +1,16 @@
+{
+  "name": "Nimantro — Create. Invite. Celebrate.",
+  "short_name": "Nimantro",
+  "description": "Multilingual digital invitation and event management platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9F1",
+  "theme_color": "#8B2635",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

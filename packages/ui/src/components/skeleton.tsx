@@ -1,0 +1,20 @@
+// ============================================================
+// Nimantro — Skeleton Primitive
+// packages/ui/src/components/skeleton.tsx
+// ============================================================
+
+import * as React from "react";
+import { cn } from "../lib/utils";
+
+export function Skeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("rounded-md bg-secondary/80", className)}
+      aria-hidden="true"
+      {...props}
+    />
+  );
+}

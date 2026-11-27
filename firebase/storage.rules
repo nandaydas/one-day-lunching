@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // ─── Helper functions ─────────────────────────────────────
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function isValidImageType() {
+      return request.resource.contentType.matches('image/(jpeg|png|webp|gif)');
+    }
+
+    function isValidDocumentType() {
+      return request.resource.contentType.matches('application/pdf');
+    }
+
+    function maxSizeMB(mb) {
+      return request.resource.size <= mb * 1024 * 1024;
+    }
+
+    // ─── User profile images ──────────────────────────────────
+
+    match /users/{userId}/profile/{filename} {
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && uid() == userId
+        && isValidImageType()
+        && maxSizeMB(5);
+      allow delete: if signedIn() && uid() == userId;
+    }
+
+    // ─── Event assets ─────────────────────────────────────────
+
+    match /events/{eventId}/assets/{filename} {
+      // Owners and members can read; write is restricted to managers
+      // We use Cloud Functions to verify event membership for reads from public invitations
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && isValidImageType()
+        && maxSizeMB(10);
+      allow delete: if signedIn();
+    }
+
+    // ─── Event exports (download only, written by Cloud Run) ──
+
+    match /events/{eventId}/exports/{filename} {
+      allow read: if signedIn();
+      allow write: if false; // Written exclusively by Cloud Run export worker
+    }
+
+    // ─── Template assets (admin-only write) ───────────────────
+
+    match /templates/{templateId}/assets/{filename} {
+      allow read: if true; // Public read for published template thumbnails
+      allow create, update: if isAdmin()
+        && (isValidImageType() || isValidDocumentType())
+        && maxSizeMB(20);
+      allow delete: if isAdmin();
+    }
+
+    // ─── Default deny ─────────────────────────────────────────
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

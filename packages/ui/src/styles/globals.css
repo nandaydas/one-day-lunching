@@ -1,0 +1,201 @@
+/* ============================================================
+   Nimantro — Global Design System Styles
+   packages/ui/src/styles/globals.css
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Nimantro Design Tokens ──────────────────────────────── */
+
+@layer base {
+  :root {
+    /* Brand colours */
+    --color-primary: 139 38 53;          /* #8B2635 deep burgundy */
+    --color-primary-foreground: 255 249 241;
+    --color-secondary: 214 181 109;      /* #D6B56D muted gold */
+    --color-secondary-foreground: 36 33 36;
+
+    /* Surfaces */
+    --color-background: 250 249 246;     /* #FAF9F6 archival paper neutral */
+    --color-surface: 255 255 255;
+    --color-surface-elevated: 244 242 237;
+
+    /* Text */
+    --color-text: 28 26 24;              /* #1C1A18 charcoal ink */
+    --color-muted: 113 108 102;          /* #716C66 stone grey */
+    --color-muted-foreground: 113 108 102;
+
+    /* Border */
+    --color-border: 229 225 218;         /* #E5E1DA hairline warm neutral */
+    --color-border-strong: 207 201 191;
+
+    /* Status */
+    --color-success: 22 163 74;
+    --color-warning: 180 120 20;
+    --color-error: 220 38 38;
+    --color-info: 30 90 180;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 1px 2px rgba(28, 26, 24, 0.05);
+    --shadow-elevated: 0 8px 24px rgba(28, 26, 24, 0.06);
+    --shadow-modal: 0 20px 48px rgba(28, 26, 24, 0.12);
+
+    /* shadcn/ui compatible tokens */
+    --background: 250 249 246;
+    --foreground: 28 26 24;
+    --card: 255 255 255;
+    --card-foreground: 28 26 24;
+    --popover: 255 255 255;
+    --popover-foreground: 28 26 24;
+    --primary: 139 38 53;
+    --primary-foreground: 255 252 248;
+    --secondary: 242 240 235;
+    --secondary-foreground: 28 26 24;
+    --muted: 243 241 236;
+    --muted-foreground: 113 108 102;
+    --accent: 198 164 92;
+    --accent-foreground: 28 26 24;
+    --destructive: 185 28 28;
+    --destructive-foreground: 255 255 255;
+    --border: 229 225 218;
+    --input: 222 217 209;
+    --ring: 139 38 53;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 15 18;
+    --foreground: 243 237 230;
+    --card: 30 24 27;
+    --card-foreground: 243 237 230;
+    --popover: 30 24 27;
+    --popover-foreground: 243 237 230;
+    --primary: 185 90 100;
+    --primary-foreground: 20 15 18;
+    --secondary: 50 42 46;
+    --secondary-foreground: 243 237 230;
+    --muted: 50 42 46;
+    --muted-foreground: 160 148 140;
+    --accent: 174 141 89;
+    --accent-foreground: 20 15 18;
+    --destructive: 190 50 60;
+    --destructive-foreground: 255 255 255;
+    --border: 50 42 46;
+    --input: 50 42 46;
+    --ring: 185 90 100;
+  }
+}
+
+/* ─── Base element styles ─────────────────────────────────── */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Bengali text improvements */
+  .lang-bn,
+  [lang="bn"] {
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+    /* Bengali is strictly LTR — do not apply direction: rtl */
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+
+  /* Invitation display contexts use decorative fonts */
+  .invitation-heading {
+    font-family: var(--font-noto-serif-bengali), var(--font-playfair), serif;
+    font-feature-settings: "swsh" 1, "hist" 0;
+  }
+
+  .invitation-body {
+    font-family: var(--font-hind-siliguri), var(--font-lato), sans-serif;
+  }
+
+  /* Focus rings — prominent for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+}
+
+/* ─── Component utilities ─────────────────────────────────── */
+
+@layer components {
+  /* Premium card */
+  .card-premium {
+    @apply rounded-2xl bg-card shadow-card border border-border p-6;
+  }
+
+  /* Invitation preview container */
+  .invitation-frame {
+    @apply relative overflow-hidden rounded-2xl shadow-elevated;
+    background: rgb(var(--color-background));
+    min-height: 100vh;
+  }
+
+  /* Floral decorative divider */
+  .divider-floral {
+    @apply flex items-center gap-3 my-6;
+  }
+
+  .divider-floral::before,
+  .divider-floral::after {
+    @apply flex-1 h-px bg-border;
+    content: "";
+  }
+
+  /* Status indicator dot */
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+
+  /* Bengali numeral display */
+  .numeral-bn {
+    font-variant-numeric: normal;
+    font-family: var(--font-noto-sans-bengali), sans-serif;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Print styles ───────────────────────────────────────── */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .invitation-frame {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+}

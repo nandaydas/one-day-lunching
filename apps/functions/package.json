@@ -1,0 +1,28 @@
+{
+  "name": "functions",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --dts --out-dir dist --external firebase-admin --external firebase-functions",
+    "dev": "tsup src/index.ts --format cjs --watch --out-dir dist --external firebase-admin --external firebase-functions",
+    "type-check": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "dependencies": {
+    "@nimantro/types": "workspace:*",
+    "@nimantro/validation": "workspace:*",
+    "@nimantro/firebase": "workspace:*",
+    "firebase-admin": "^13.0.1",
+    "firebase-functions": "^6.1.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  }
+}

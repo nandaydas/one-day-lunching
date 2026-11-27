@@ -1,0 +1,132 @@
+{
+  "id": "griha-pravesh-warm-001",
+  "version": 1,
+  "name": "Griha Pravesh Blessing",
+  "slug": "griha-pravesh-warm",
+  "category": "traditional",
+  "eventCategories": ["housewarming"],
+  "languages": ["en", "bn"],
+  "thumbnail": "/art/cultural-3d.jpg",
+  "access": "free",
+  "tags": ["housewarming", "griha-pravesh", "bengali", "traditional"],
+  "theme": {
+    "primary": "#9D4E2A",
+    "secondary": "#D19E4B",
+    "background": "#FDF8F1",
+    "surface": "#FFFFFF",
+    "text": "#2A211B",
+    "muted": "#7A6A5F",
+    "border": "#EAD9C4",
+    "headingFont": "Playfair Display",
+    "bodyFont": "Hind Siliguri",
+    "accentFont": "Noto Serif Bengali"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "enabled": true,
+      "order": 0,
+      "required": true,
+      "locked": false,
+      "defaultContent": {
+        "title": { "en": "Griha Pravesh & Housewarming", "bn": "শুভ গৃহপ্রবেশ" },
+        "subtitle": { "en": "Warmly welcoming you to our new home", "bn": "নতুন নীড়ে আপনাদের সাদর আমন্ত্রণ" },
+        "primaryNames": { "en": "The Dutta Family", "bn": "দত্ত পরিবার" },
+        "dateLabel": { "en": "Sunday, 29 November 2026", "bn": "রবিবার, ২৯শে নভেম্বর ২০২৬" },
+        "artworkUrl": "/art/cultural-3d.jpg"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "enabled": true,
+      "order": 1,
+      "defaultContent": {
+        "heading": { "en": "Puja & Prasad", "bn": "গৃহপ্রবেশ ও পূজা" },
+        "message": {
+          "en": "Join us for the morning Griha Pravesh puja followed by warm fellowship and lunch at our new residence.",
+          "bn": "আমাদের নতুন গৃহের শুভ গৃহপ্রবেশ পূজা ও মধ্যাহ্নভোজে আপনার সপরিবার উপস্থিতি ও আশীর্বাদ কামনা করি।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "story",
+      "type": "story",
+      "enabled": true,
+      "order": 2,
+      "defaultContent": {
+        "storyType": "family-chronicle",
+        "heading": { "en": "A New Door Opens", "bn": "আমাদের নতুন নীড়ের গল্প" },
+        "narrative": {
+          "en": "From sunlit blueprints and painted balconies to lighting the first brass diya on our threshold.",
+          "bn": "স্বপ্ন দেখা থেকে শুরু করে প্রথম প্রদীপ জ্বালানো—সব মিলিয়ে আমাদের নতুন বাড়ির গল্প।"
+        },
+        "quote": {
+          "en": "A home is built of walls and beams, yet comes alive only when filled with voices you love.",
+          "bn": "ইট-কাঠের ঘর তখনই সত্যিকারের বাড়ি হয়ে ওঠে, যখন সেখানে প্রিয়জনদের হাসি ছড়িয়ে পড়ে।"
+        },
+        "attribution": { "en": "The Dutta Household", "bn": "দত্ত পরিবারবর্গ" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "scroll-reveal" }
+    },
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": { "en": "Morning Schedule", "bn": "অনুষ্ঠান সূচি" },
+        "item1Title": { "en": "Griha Pravesh Puja", "bn": "গৃহপ্রবেশ পূজা ও যজ্ঞ" },
+        "item1Time": { "en": "9:30 AM", "bn": "সকাল ৯:৩০" },
+        "item2Title": { "en": "Prasad & Lunch", "bn": "প্রসাদ ও মধ্যাহ্নভোজ" },
+        "item2Time": { "en": "1:00 PM", "bn": "দুপুর ১:০০" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "venue",
+      "type": "venue",
+      "enabled": true,
+      "order": 4,
+      "defaultContent": {
+        "heading": { "en": "Our New Home", "bn": "নতুন ঠিকানা" },
+        "venueName": { "en": "Shantiniketan Residency, Flat 4B", "bn": "শান্তিনিকেতন অ্যাপার্টমেন্ট, ফ্ল্যাট ৪বি" },
+        "address": { "en": "Gariahat Road, South Kolkata", "bn": "গড়িয়াহাট রোড, দক্ষিণ কলকাতা" },
+        "mapsUrl": "https://maps.google.com/?q=Gariahat+Kolkata"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "rsvp",
+      "type": "rsvp",
+      "enabled": true,
+      "order": 5,
+      "defaultContent": {
+        "heading": { "en": "Confirm Attendance", "bn": "উপস্থিতি নিশ্চিত করুন" },
+        "description": { "en": "Kindly confirm your attendance.", "bn": "অনুগ্রহ করে আপনার আগমন জানান।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "enabled": true,
+      "order": 6,
+      "required": true,
+      "defaultContent": {
+        "closing": { "en": "Your presence will bless our new beginning.", "bn": "আপনাদের আশীর্বাদে ধন্য হোক আমাদের নতুন গৃহ।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-in" }
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "id": "ashirbad-floral-001",
+  "version": 1,
+  "name": "Floral Ashirbad & Engagement",
+  "slug": "ashirbad-floral-engagement",
+  "category": "floral",
+  "eventCategories": ["engagement"],
+  "languages": ["en", "bn"],
+  "thumbnail": "/art/engagement-3d.jpg",
+  "access": "free",
+  "tags": ["engagement", "ashirbad", "floral", "pastel", "bengali"],
+  "theme": {
+    "primary": "#9E4244",
+    "secondary": "#8AA38B",
+    "background": "#FFFBF8",
+    "surface": "#FFFFFF",
+    "text": "#2A2124",
+    "muted": "#7D6F72",
+    "border": "#EFE0DC",
+    "headingFont": "Playfair Display",
+    "bodyFont": "Hind Siliguri",
+    "accentFont": "Noto Serif Bengali"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "enabled": true,
+      "order": 0,
+      "required": true,
+      "locked": false,
+      "defaultContent": {
+        "title": { "en": "Ashirbad & Engagement", "bn": "শুভ আশীর্বাদ ও বাগদান" },
+        "subtitle": { "en": "Celebrating the beginning of forever", "bn": "নতুন পথচলার শুভ সূচনা" },
+        "primaryNames": { "en": "Srijita & Anirban", "bn": "সৃজিতা ও অনির্বাণ" },
+        "dateLabel": { "en": "Friday, 20 November 2026", "bn": "শুক্রবার, ২০শে নভেম্বর ২০২৬" },
+        "artworkUrl": "/art/engagement-3d.jpg"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "floral-reveal", "duration": 800 }
+    },
+    {
+      "id": "welcome",
+      "type": "welcome",
+      "enabled": true,
+      "order": 1,
+      "defaultContent": {
+        "heading": { "en": "With Joy & Blessings", "bn": "আন্তরিক আমন্ত্রণ" },
+        "message": {
+          "en": "With the blessings of our elders and warmth of loved ones, we invite you to celebrate our engagement.",
+          "bn": "গুরুজনদের আশীর্বাদ ও প্রিয়জনদের ভালোবাসা নিয়ে দুই জীবনের নতুন অধ্যায়ের শুভ সূচনায় আপনার উপস্থিতি প্রার্থনীয়।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "story",
+      "type": "story",
+      "enabled": true,
+      "order": 2,
+      "defaultContent": {
+        "storyType": "couple-journey",
+        "heading": { "en": "How It Began", "bn": "আমাদের গল্প" },
+        "narrative": {
+          "en": "From timeless conversations over evening tea to a promise blessed by both families.",
+          "bn": "কফি হাউসের আড্ডা থেকে শুরু হওয়া বন্ধুত্ব আজ পারিবারিক আশীর্বাদে পূর্ণতা পেতে চলেছে।"
+        },
+        "chapter1Tag": { "en": "Chapter 01", "bn": "প্রথম দেখা" },
+        "chapter1Title": { "en": "Monsoon Chai", "bn": "বর্ষার বিকেলে চা" },
+        "chapter1Detail": {
+          "en": "Two umbrellas, one shared table, and an instant connection over poetry.",
+          "bn": "বৃষ্টিভেজা বিকেলে এক কাপ চা আর কবিতার বই দিয়ে শুরু হয়েছিল গল্প।"
+        },
+        "chapter2Tag": { "en": "Chapter 02", "bn": "পরিবারের সম্মতি" },
+        "chapter2Title": { "en": "Meeting the Elders", "bn": "গুরুজনদের আশীর্বাদ" },
+        "chapter2Detail": {
+          "en": "A joyful Sunday lunch where two households immediately felt like one.",
+          "bn": "এক রবিবারের দুপুরের আড্ডায় দুই পরিবার আপন হয়ে উঠল।"
+        },
+        "chapter3Tag": { "en": "Chapter 03", "bn": "বাগদান সন্ধ্যা" },
+        "chapter3Title": { "en": "Rings & Ashirbad", "bn": "আংটি বদল ও আশীর্বাদ" },
+        "chapter3Detail": {
+          "en": "Golden paddy grains, durba grass, and lotus garlands bless the ring exchange.",
+          "bn": "ধান-দূর্বা ও পদ্মফুলের মালায় আশীর্বাদের পবিত্র মুহূর্ত।"
+        }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "scroll-reveal" }
+    },
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "enabled": true,
+      "order": 3,
+      "defaultContent": {
+        "heading": { "en": "Ceremony Timeline", "bn": "অনুষ্ঠান সূচি" },
+        "item1Title": { "en": "Ashirbad Ceremony", "bn": "শুভ আশীর্বাদ" },
+        "item1Time": { "en": "11:00 AM", "bn": "সকাল ১১:০০" },
+        "item2Title": { "en": "Ring Exchange & Lunch", "bn": "আংটি বদল ও মধ্যাহ্নভোজ" },
+        "item2Time": { "en": "1:00 PM", "bn": "দুপুর ১:০০" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "venue",
+      "type": "venue",
+      "enabled": true,
+      "order": 4,
+      "defaultContent": {
+        "heading": { "en": "Venue", "bn": "অনুষ্ঠানের স্থান" },
+        "venueName": { "en": "Lily Court, Ballygunge", "bn": "লিলি কোর্ট, বালিগঞ্জ" },
+        "address": { "en": "Ballygunge Circular Rd, Kolkata", "bn": "বালিগঞ্জ সার্কুলার রোড, কলকাতা" },
+        "mapsUrl": "https://maps.google.com/?q=Ballygunge+Kolkata"
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "rsvp",
+      "type": "rsvp",
+      "enabled": true,
+      "order": 5,
+      "defaultContent": {
+        "heading": { "en": "RSVP", "bn": "আপনার উপস্থিতি জানান" },
+        "description": { "en": "Please let us know if you can join us.", "bn": "দয়া করে আপনার আগমন নিশ্চিত করুন।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-up" }
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "enabled": true,
+      "order": 6,
+      "required": true,
+      "defaultContent": {
+        "closing": { "en": "Your presence and blessings mean the world to us.", "bn": "আপনাদের আশীর্বাদ ও শুভেচ্ছা একান্ত কাম্য।" }
+      },
+      "style": { "alignment": "center" },
+      "animation": { "preset": "fade-in" }
+    }
+  ]
+}
