@@ -21,6 +21,21 @@ async function downscale(file: File): Promise<Blob> {
   );
 }
 
+/** Shrinks and uploads one photo to the event's storage folder; returns its public URL. */
+export async function uploadEventPhoto(eventId: string, file: File): Promise<string> {
+  const blob = await downscale(file);
+  const path = `events/${eventId}/assets/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
+  const snap = await uploadBytes(ref(getClientStorage(), path), blob, { contentType: "image/jpeg" });
+  return getDownloadURL(snap.ref);
+}
+
+/** Returns an error message if any file is not an acceptable photo. */
+export function checkPhotos(files: File[]): string | null {
+  if (files.some((f) => !f.type.startsWith("image/"))) return "Please choose image files only.";
+  if (files.some((f) => f.size > MAX_INPUT_MB * 1024 * 1024)) return `Each photo must be under ${MAX_INPUT_MB} MB.`;
+  return null;
+}
+
 export function PhotoUploader({
   eventId,
   value,
@@ -43,20 +58,12 @@ export function PhotoUploader({
     setError(null);
     const room = max - value.length;
     const picked = Array.from(files).slice(0, max === 1 ? 1 : room);
-    if (picked.some((f) => !f.type.startsWith("image/"))) return setError("Please choose image files only.");
-    if (picked.some((f) => f.size > MAX_INPUT_MB * 1024 * 1024)) return setError(`Each photo must be under ${MAX_INPUT_MB} MB.`);
+    const problem = checkPhotos(picked);
+    if (problem) return setError(problem);
 
     setBusy(true);
     try {
-      const storage = getClientStorage();
-      const urls = await Promise.all(
-        picked.map(async (file) => {
-          const blob = await downscale(file);
-          const path = `events/${eventId}/assets/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
-          const snap = await uploadBytes(ref(storage, path), blob, { contentType: "image/jpeg" });
-          return getDownloadURL(snap.ref);
-        })
-      );
+      const urls = await Promise.all(picked.map((file) => uploadEventPhoto(eventId, file)));
       onChange(max === 1 ? urls.slice(0, 1) : [...value, ...urls].slice(0, max));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Upload failed. Please try again.");

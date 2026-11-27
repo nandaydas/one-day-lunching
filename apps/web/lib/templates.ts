@@ -7,7 +7,8 @@ import {
   validateTemplate,
   type TemplateDefinition,
 } from "@nimantro/template-schema";
-import type { EventCategory, TemplateCategory } from "@nimantro/types";
+import type { EventCategory, InvitationDesignDocument, TemplateCategory } from "@nimantro/types";
+import { SECTION_CATALOG, templateToDesignDocument } from "@nimantro/invitation-engine";
 
 import bengaliWeddingJson from "../../../templates/wedding/bengali-traditional-wedding.json";
 import royalReceptionJson from "../../../templates/wedding/royal-bengali-reception.json";
@@ -65,4 +66,21 @@ export function filterTemplates(options?: {
     }
     return true;
   });
+}
+
+/**
+ * Invitations made before galleries existed have no gallery section.
+ * Adds the template's gallery (or the default one) after the story, so every event can take photos.
+ */
+export function withGallery(design: InvitationDesignDocument): InvitationDesignDocument {
+  if (design.sections.some((s) => s.type === "gallery")) return design;
+  const template = getTemplateById(design.templateId);
+  const fromTemplate = template ? templateToDesignDocument(template).sections.find((s) => s.type === "gallery") : undefined;
+  const gallery = fromTemplate ?? SECTION_CATALOG.find((c) => c.type === "gallery")!.createDefaultSection(0);
+  const sections = [...design.sections].sort((a, b) => a.order - b.order);
+  const story = sections.findIndex((s) => s.type === "story");
+  const tail = sections.findIndex((s) => s.type === "rsvp" || s.type === "footer");
+  const at = story >= 0 ? story + 1 : tail >= 0 ? tail : sections.length;
+  sections.splice(at, 0, { ...gallery, content: { ...gallery.content } });
+  return { ...design, sections: sections.map((s, i) => ({ ...s, order: i })) };
 }

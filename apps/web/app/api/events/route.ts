@@ -9,9 +9,11 @@ import { templateToDesignDocument } from "@nimantro/invitation-engine";
 import { CreateEventSchema, generateSlug, z } from "@nimantro/validation";
 import { getServerUser } from "@/lib/server-auth";
 import { BUNDLED_TEMPLATES, getTemplateById } from "@/lib/templates";
+import { EXPERIENCE_OPTIONS } from "@/lib/experience";
 
 const CreateEventPayloadSchema = CreateEventSchema.extend({
   templateId: z.string().optional(),
+  experience: z.record(z.string().max(40)).optional(),
 });
 
 export async function GET() {
@@ -65,6 +67,7 @@ export async function POST(request: NextRequest) {
       venue,
       coverImageUrl,
       templateId,
+      experience,
     } = parsed.data;
 
     const startDate = new Date(startAt);
@@ -132,6 +135,11 @@ export async function POST(request: NextRequest) {
           : {}),
       },
     });
+    // Host's opening/music/effect picks from the create form; unknown keys or values are dropped.
+    const picks = Object.entries(experience ?? {}).filter(([k, v]) =>
+      (EXPERIENCE_OPTIONS[k as keyof typeof EXPERIENCE_OPTIONS] as readonly string[] | undefined)?.includes(v)
+    );
+    if (picks.length) designDocument.metadata = Object.fromEntries(picks);
 
     const eventRef = db.collection("events").doc();
     const invitationRef = eventRef.collection("invitations").doc();

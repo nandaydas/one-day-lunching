@@ -417,7 +417,7 @@ function rand(min: number, max: number) {
 }
 
 function petal(i: number, colors: string[]): Particle {
-  const size = rand(8, 16);
+  const size = rand(12, 22);
   const duration = rand(9, 17);
   return {
     cls: "fx-fall",
@@ -427,7 +427,7 @@ function petal(i: number, colors: string[]): Particle {
     backgroundColor: colors[i % colors.length],
     borderRadius: "80% 0 80% 0",
     animationDuration: `${duration}s, ${duration / 3}s`,
-    animationDelay: `${rand(0, 10)}s, 0s`,
+    animationDelay: `-${rand(0, duration)}s, -${rand(0, 3)}s`,
   };
 }
 
@@ -443,14 +443,14 @@ const FX: Record<EffectKind, (i: number) => Particle> = {
     fontSize: rand(8, 18),
     color: "var(--inv-secondary)",
     animationDuration: `${rand(2, 4)}s`,
-    animationDelay: `${rand(0, 4)}s`,
+    animationDelay: `-${rand(0, 4)}s`,
   }),
   fireflies: () => ({
     cls: "fx-firefly",
     left: `${rand(0, 100)}%`,
     top: `${rand(10, 95)}%`,
     animationDuration: `${rand(6, 12)}s, ${rand(1.5, 3)}s`,
-    animationDelay: `${rand(0, 5)}s, ${rand(0, 3)}s`,
+    animationDelay: `-${rand(0, 5)}s, -${rand(0, 3)}s`,
   }),
   confetti: (i) =>
     i % 6 === 0
@@ -459,7 +459,7 @@ const FX: Record<EffectKind, (i: number) => Particle> = {
           left: `${rand(5, 95)}%`,
           backgroundColor: ["#F43F5E", "#3B82F6", "#F59E0B", "#10B981"][i % 4],
           animationDuration: `${rand(12, 18)}s`,
-          animationDelay: `${rand(0, 8)}s`,
+          animationDelay: `-${rand(0, 12)}s`,
         }
       : {
           cls: "fx-fall",
@@ -468,13 +468,13 @@ const FX: Record<EffectKind, (i: number) => Particle> = {
           height: 12,
           backgroundColor: ["#F43F5E", "#3B82F6", "#F59E0B", "#10B981", "#A855F7"][i % 5],
           animationDuration: `${rand(5, 9)}s, ${rand(1.5, 3)}s`,
-          animationDelay: `${rand(0, 6)}s, 0s`,
+          animationDelay: `-${rand(0, 9)}s, -${rand(0, 3)}s`,
         },
   diyas: () => ({
     cls: "fx-rise fx-diya",
     left: `${rand(5, 95)}%`,
     animationDuration: `${rand(14, 22)}s`,
-    animationDelay: `${rand(0, 12)}s`,
+    animationDelay: `-${rand(0, 14)}s`,
   }),
   bubbles: () => {
     const s = rand(14, 40);
@@ -484,7 +484,7 @@ const FX: Record<EffectKind, (i: number) => Particle> = {
       width: s,
       height: s,
       animationDuration: `${rand(10, 18)}s`,
-      animationDelay: `${rand(0, 10)}s`,
+      animationDelay: `-${rand(0, 10)}s`,
     };
   },
 };
@@ -492,7 +492,7 @@ const FX: Record<EffectKind, (i: number) => Particle> = {
 function AmbientEffect({ kind }: { kind: EffectKind }) {
   // Generated after the cover opens (client only), so random values are hydration-safe.
   const particles = React.useMemo(
-    () => Array.from({ length: kind === "sparkles" ? 26 : 20 }, (_, i) => FX[kind](i)),
+    () => Array.from({ length: kind === "sparkles" ? 32 : 30 }, (_, i) => FX[kind](i)),
     [kind]
   );
   return (

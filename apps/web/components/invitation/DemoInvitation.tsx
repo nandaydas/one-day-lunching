@@ -27,22 +27,36 @@ const LABELS: Record<string, string> = {
 
 const TRY = ["music", "effect", "opening"] as const;
 
+// Illustrated stand-ins showing where a host's own uploads appear.
+const SAMPLE_HERO = "/samples/couple.svg";
+const SAMPLE_GALLERY = ["/samples/mandap.svg", "/samples/marigold.svg", "/samples/diyas.svg", "/samples/flowers.svg", "/samples/couple.svg"];
+
 export function DemoInvitation({ templateId }: { templateId: string }) {
   const template = getTemplateById(templateId)!;
   const [locale, setLocale] = React.useState<"bn" | "en">("en");
   const [meta, setMeta] = React.useState<Record<string, string>>({});
   const [replay, setReplay] = React.useState(0);
-  const design = React.useMemo(
-    () => ({ ...templateToDesignDocument(template), metadata: meta }),
-    [template, meta]
-  );
+  const [photos, setPhotos] = React.useState(true);
+  const design = React.useMemo(() => {
+    const base = templateToDesignDocument(template);
+    const sections = photos
+      ? base.sections.map((s) =>
+          s.type === "hero"
+            ? { ...s, content: { ...s.content, photoUrl: SAMPLE_HERO } }
+            : s.type === "gallery"
+              ? { ...s, content: { ...s.content, images: SAMPLE_GALLERY } }
+              : s
+        )
+      : base.sections;
+    return { ...base, sections, metadata: meta };
+  }, [template, meta, photos]);
   const hero = design.sections.find((s) => s.type === "hero")?.content.primaryNames;
   const names =
     hero && typeof hero === "object" ? ((hero as Record<string, string>)[locale] ?? "") : String(hero ?? "");
   const current = { ...template.experience, ...meta } as Record<string, string>;
 
   return (
-    <div className="mx-auto max-w-2xl px-3 pb-40 pt-4 sm:px-6">
+    <div className="mx-auto max-w-[440px] px-3 pb-40 pt-4">
       <InvitationExperience
         key={replay}
         design={design}
@@ -76,6 +90,14 @@ export function DemoInvitation({ templateId }: { templateId: string }) {
           ))}
           <button type="button" className="h-8 rounded-full border px-3" onClick={() => setReplay((r) => r + 1)}>
             ↺ Replay
+          </button>
+          <button
+            type="button"
+            aria-pressed={photos}
+            className={`h-8 rounded-full border px-3 ${photos ? "bg-primary/10 font-medium" : ""}`}
+            onClick={() => setPhotos((p) => !p)}
+          >
+            📷 {photos ? "Sample photos on" : "Sample photos off"}
           </button>
         </div>
         <div className="mx-auto mt-2 flex max-w-2xl items-center justify-center gap-2">

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B1A4A"/><stop offset=".45" stop-color="#C2456B"/><stop offset=".75" stop-color="#F59E5B"/><stop offset="1" stop-color="#FFD9A0"/></linearGradient><filter id="b"><feGaussianBlur stdDeviation="14"/></filter><filter id="s"><feGaussianBlur stdDeviation="4"/></filter></defs>
+<rect width="800" height="1000" fill="url(#sky)"/>
+<circle cx="400" cy="560" r="190" fill="#FFD27A" opacity=".9"/>
+<circle cx="400" cy="560" r="260" fill="#FFB347" opacity=".25" filter="url(#b)"/>
+<path d="M0 700 Q200 640 400 690 T800 670 V1000 H0Z" fill="#7A2E3A"/>
+<path d="M0 780 Q250 730 520 780 T800 760 V1000 H0Z" fill="#4A1424"/>
+<g fill="#2A0A14">
+ <circle cx="352" cy="520" r="30"/>
+ <path d="M322 552 Q352 540 382 552 L400 700 Q404 790 420 800 L290 800 Q300 760 306 700Z"/>
+ <path d="M318 560 Q270 600 300 650 L312 640 Q296 600 330 575Z"/>
+ <circle cx="448" cy="500" r="32"/>
+ <path d="M416 535 Q448 524 480 535 L492 680 L486 800 L462 800 L452 700 L442 800 L418 800 L412 680Z"/>
+ <path d="M418 560 Q395 600 392 640 L405 640 Q410 600 428 580Z"/>
+</g>
+<path d="M330 500 Q352 470 378 500" stroke="#C9A84C" stroke-width="6" fill="none"/>
+</svg>

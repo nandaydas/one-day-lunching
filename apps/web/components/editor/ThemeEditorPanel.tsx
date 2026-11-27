@@ -25,7 +25,7 @@ import { useLocale } from "@/hooks/useLocale";
 import { EXPERIENCE_OPTIONS, resolveExperience } from "@/lib/experience";
 import { MUSIC_PRESETS } from "@/lib/invite-music";
 
-const EXPERIENCE_FIELDS: {
+export const EXPERIENCE_FIELDS: {
   key: keyof typeof EXPERIENCE_OPTIONS;
   label: string;
   names?: Record<string, string>;
