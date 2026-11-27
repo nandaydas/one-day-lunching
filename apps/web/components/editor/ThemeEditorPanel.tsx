@@ -26,7 +26,7 @@ import { useLocale } from "@/hooks/useLocale";
 const ALL_FONTS = [...SUPPORTED_BENGALI_FONTS, ...SUPPORTED_LATIN_FONTS];
 
 export function ThemeEditorPanel() {
-  const { design, updateTheme, updateLanguage, pushHistory } = useEditorStore();
+  const { design, updateTheme, updateLanguage, updateMetadata, pushHistory } = useEditorStore();
   const { t } = useLocale();
   if (!design) return null;
 
@@ -127,6 +127,41 @@ export function ThemeEditorPanel() {
               ))}
             </SelectContent>
           </Select>
+        </div>
+      </div>
+
+      <div className="space-y-2 pt-2 border-t border-border">
+        <div className="space-y-1">
+          <Label className="text-xs">Opening animation</Label>
+          <Select
+            value={design.metadata?.opening || "auto"}
+            onValueChange={(v) => {
+              updateMetadata("opening", v === "auto" ? "" : v);
+              pushHistory("Change opening");
+            }}
+          >
+            <SelectTrigger className="h-9 text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="auto">Auto (by template)</SelectItem>
+              <SelectItem value="envelope">Envelope &amp; wax seal</SelectItem>
+              <SelectItem value="curtain">Royal curtain</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs">Background music (MP3 link)</Label>
+          <Input
+            className="h-9 text-xs"
+            placeholder="Leave empty for built-in shehnai music"
+            value={design.metadata?.musicUrl ?? ""}
+            onChange={(e) => updateMetadata("musicUrl", e.target.value)}
+            onBlur={() => pushHistory("Change music")}
+          />
+          <p className="text-[11px] text-muted-foreground">
+            Only use music you have the rights to share.
+          </p>
         </div>
       </div>
     </div>

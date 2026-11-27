@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#FFE9B8"/><stop offset="1" stop-color="#FFF4E6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1D27A"/><stop offset="1" stop-color="#B8862B"/></linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#g)"/>
+  <!-- Topor (groom) -->
+  <g transform="translate(118 40)">
+    <path d="M40 0 L72 150 L8 150 Z" fill="#FFF8EC" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M40 18 L62 120 L18 120 Z" fill="none" stroke="#9B111E" stroke-width="2.5"/>
+    <circle cx="40" cy="80" r="11" fill="#9B111E"/><circle cx="40" cy="80" r="5" fill="#F1D27A"/>
+    <path d="M14 136 Q40 120 66 136" fill="none" stroke="url(#gold)" stroke-width="3"/>
+    <rect x="2" y="150" width="76" height="16" rx="6" fill="url(#gold)"/>
+    <g fill="#9B111E"><circle cx="16" cy="158" r="3"/><circle cx="40" cy="158" r="3"/><circle cx="64" cy="158" r="3"/></g>
+  </g>
+  <!-- Mukut (bride) -->
+  <g transform="translate(212 92)">
+    <path d="M0 98 Q8 30 35 6 Q42 26 50 6 Q58 26 65 6 Q92 30 100 98 Z" fill="#FFF8EC" stroke="url(#gold)" stroke-width="4"/>
+    <path d="M14 90 Q50 54 86 90" fill="none" stroke="#9B111E" stroke-width="2.5"/>
+    <circle cx="50" cy="48" r="10" fill="#9B111E"/><circle cx="50" cy="48" r="4" fill="#F1D27A"/>
+    <g fill="url(#gold)"><circle cx="35" cy="6" r="5"/><circle cx="50" cy="2" r="6"/><circle cx="65" cy="6" r="5"/></g>
+    <rect x="-4" y="98" width="108" height="16" rx="6" fill="url(#gold)"/>
+    <g fill="#9B111E"><circle cx="14" cy="106" r="3"/><circle cx="50" cy="106" r="3"/><circle cx="86" cy="106" r="3"/></g>
+  </g>
+  <!-- marigold garland -->
+  <path d="M30 26 Q200 92 370 26" fill="none" stroke="#E88A1A" stroke-width="7" stroke-dasharray="2 9" stroke-linecap="round"/>
+  <path d="M30 26 Q200 92 370 26" fill="none" stroke="#F6B73C" stroke-width="5" stroke-dasharray="1 10" stroke-linecap="round" stroke-dashoffset="5"/>
+  <g fill="url(#gold)" opacity=".8"><circle cx="70" cy="240" r="3"/><circle cx="330" cy="240" r="3"/><circle cx="52" cy="210" r="2"/><circle cx="348" cy="210" r="2"/></g>
+  <path d="M120 270 Q200 252 280 270" fill="none" stroke="#9B111E" stroke-width="2" opacity=".6"/>
+</svg>

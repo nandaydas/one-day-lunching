@@ -108,7 +108,7 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
     <div className="py-6 sm:py-10 space-y-5">
       <AlponaCrest className="w-32 h-10 mx-auto" />
       {artworkUrl && (
-        <div className="relative mx-auto w-full max-w-[300px] aspect-[4/3]">
+        <div className="relative mx-auto w-full max-w-[300px] aspect-[4/3] inv-kenburns">
           <Image
             src={artworkUrl}
             alt={primaryNames || title || "Celebration artwork"}
@@ -133,7 +133,7 @@ function HeroSection({ section, locale, eventMeta }: SectionRenderContext) {
       )}
       {title && (
         <h1
-          className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight"
+          className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight inv-shimmer-ink"
           style={{
             color: "var(--inv-primary)",
             fontFamily: "var(--inv-heading-font)",

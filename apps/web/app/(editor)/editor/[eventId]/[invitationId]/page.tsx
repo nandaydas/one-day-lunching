@@ -57,7 +57,7 @@ import {
   cn,
   toast,
 } from "@nimantro/ui";
-import { InvitationRenderer } from "@/components/invitation/InvitationRenderer";
+import { InvitationRenderer, type PublicEventMeta } from "@/components/invitation/InvitationRenderer";
 import { SectionInspector } from "@/components/editor/SectionInspector";
 import { ThemeEditorPanel } from "@/components/editor/ThemeEditorPanel";
 import { useLocale } from "@/hooks/useLocale";
@@ -94,6 +94,7 @@ export default function InvitationEditorPage() {
 
   const [invitation, setInvitation] = React.useState<InvitationDocument | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const [eventMeta, setEventMeta] = React.useState<PublicEventMeta | undefined>();
   const [previewLocale, setPreviewLocale] = React.useState<"bn" | "en">("bn");
   const [addDrawerOpen, setAddDrawerOpen] = React.useState(false);
 
@@ -115,9 +116,25 @@ export default function InvitationEditorPage() {
     async function load() {
       try {
         const db = getClientDb();
-        const invSnap = await getDoc(
-          doc(db, "events", eventId, "invitations", invitationId)
-        );
+        const [invSnap, eventSnap] = await Promise.all([
+          getDoc(doc(db, "events", eventId, "invitations", invitationId)),
+          getDoc(doc(db, "events", eventId)),
+        ]);
+        const ev = eventSnap.data();
+        if (ev) {
+          const toIso = (v: unknown) =>
+            v && typeof (v as { toDate?: () => Date }).toDate === "function"
+              ? (v as { toDate: () => Date }).toDate().toISOString()
+              : typeof v === "string" ? v : null;
+          setEventMeta({
+            title: ev.title,
+            startAt: toIso(ev.startAt),
+            endAt: toIso(ev.endAt),
+            timezone: ev.timezone,
+            venue: ev.venue ?? null,
+            hostNames: ev.hostNames,
+          });
+        }
         if (invSnap.exists()) {
           const inv = { id: invSnap.id, ...invSnap.data() } as InvitationDocument;
           setInvitation(inv);
@@ -703,6 +720,7 @@ export default function InvitationEditorPage() {
           <div className={`w-full transition-all duration-200 ${canvasMaxWidth} print:max-w-2xl`}>
             <InvitationRenderer
               design={design}
+              eventMeta={eventMeta}
               locale={previewLocale}
               onLocaleChange={setPreviewLocale}
               interactive={false}

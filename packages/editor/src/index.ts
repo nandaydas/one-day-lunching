@@ -61,6 +61,7 @@ export interface EditorState {
   // Theme & Language
   updateTheme: (theme: Partial<InvitationDesignDocument["theme"]>) => void;
   updateLanguage: (language: Language) => void;
+  updateMetadata: (key: string, value: string) => void;
 
   // History
   undo: () => void;
@@ -248,6 +249,14 @@ export const useEditorStore = create<EditorState>()(
       set((state) => {
         if (!state.design) return;
         state.design.language = language;
+        state.isDirty = true;
+      });
+    },
+
+    updateMetadata: (key, value) => {
+      set((state) => {
+        if (!state.design) return;
+        state.design.metadata = { ...state.design.metadata, [key]: value };
         state.isDirty = true;
       });
     },

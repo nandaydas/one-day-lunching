@@ -100,6 +100,7 @@ export function CountdownDisplay({ targetDate, locale }: CountdownDisplayProps) 
           }}
         >
           <div
+            suppressHydrationWarning // ticks between SSR and hydrate
             className="text-2xl sm:text-3xl font-bold leading-none"
             style={{
               color: "var(--inv-primary)",

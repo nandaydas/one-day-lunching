@@ -166,6 +166,7 @@ export const InvitationDesignDocumentSchema = z.object({
   theme: InvitationThemeSchema,
   sections: z.array(InvitationSectionSchema).min(1),
   coverImageUrl: z.string().url().optional(),
+  metadata: z.record(z.string().max(1000)).optional(), // e.g. musicUrl, opening
 });
 
 export const PublishInvitationSchema = z.object({

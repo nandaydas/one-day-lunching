@@ -9,3 +9,63 @@
   --font-playfair: "Playfair Display";
   --font-lato: "Lato";
 }
+
+/* ─── Invitation cinematic effects ─────────────────────────── */
+.inv-petal {
+  position: absolute;
+  top: -5vh;
+  border-radius: 80% 0 80% 0;
+  opacity: 0.85;
+  animation-name: inv-fall, inv-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+@keyframes inv-fall {
+  from { transform: translateY(-5vh) rotate(0deg); }
+  to { transform: translateY(110vh) rotate(540deg); }
+}
+@keyframes inv-sway {
+  from { margin-left: -30px; }
+  to { margin-left: 30px; }
+}
+
+.inv-shimmer {
+  background: linear-gradient(100deg, #fff8ec 20%, var(--inv-secondary) 40%, #fff8ec 60%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: inv-shimmer 4s linear infinite;
+  text-shadow: none;
+}
+.inv-shimmer-ink {
+  background: linear-gradient(100deg, var(--inv-primary) 35%, var(--inv-secondary) 50%, var(--inv-primary) 65%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important; /* beats the renderer's inline heading colour */
+  animation: inv-shimmer 5s linear infinite;
+}
+@keyframes inv-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -150% 0; }
+}
+
+.inv-kenburns { animation: inv-kenburns 18s ease-in-out infinite alternate; }
+@keyframes inv-kenburns {
+  from { transform: scale(1) translateY(0); }
+  to { transform: scale(1.12) translateY(-3%); }
+}
+
+.inv-pulse { animation: inv-pulse 1.2s ease-in-out infinite; }
+@keyframes inv-pulse {
+  50% { transform: scale(1.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inv-petal, .inv-shimmer, .inv-shimmer-ink, .inv-kenburns, .inv-pulse { animation: none; }
+}
+@media print {
+  .inv-shimmer-ink { color: var(--inv-primary) !important; background: none; }
+}

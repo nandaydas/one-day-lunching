@@ -187,6 +187,9 @@ const FONT_STACKS: Record<string, string> = {
     "var(--font-anek-bangla), 'Anek Bangla', var(--font-playfair), 'Playfair Display', system-ui, sans-serif",
   "Playfair Display": "var(--font-playfair), 'Playfair Display', Georgia, serif",
   Lato: "var(--font-lato), 'Lato', system-ui, sans-serif",
+  Galada: "'Galada', 'Noto Serif Bengali', Georgia, cursive",
+  "Tiro Bangla": "'Tiro Bangla', 'Noto Serif Bengali', Georgia, serif",
+  "Cormorant Garamond": "'Cormorant Garamond', 'Noto Serif Bengali', Georgia, serif",
 };
 
 export const SUPPORTED_BENGALI_FONTS = [
@@ -194,11 +197,14 @@ export const SUPPORTED_BENGALI_FONTS = [
   "Noto Sans Bengali",
   "Hind Siliguri",
   "Anek Bangla",
+  "Galada",
+  "Tiro Bangla",
 ] as const;
 
 export const SUPPORTED_LATIN_FONTS = [
   "Playfair Display",
   "Lato",
+  "Cormorant Garamond",
 ] as const;
 
 export function getFontStack(fontName: string): string {

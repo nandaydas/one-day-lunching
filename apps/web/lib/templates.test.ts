@@ -13,7 +13,7 @@ describe("web template catalog", () => {
 
     for (const tpl of BUNDLED_TEMPLATES) {
       expect(tpl.languages[0]).toBe("en");
-      expect(tpl.thumbnail).toMatch(/^\/art\/.+\.jpg$/);
+      expect(tpl.thumbnail).toMatch(/^\/art\/.+\.(jpg|svg)$/);
       const doc = templateToDesignDocument(tpl);
       const story = doc.sections.find((s) => s.type === "story" && s.enabled);
       expect(story, `Template ${tpl.id} missing enabled story section`).toBeDefined();

@@ -20,6 +20,7 @@ import {
 } from "@nimantro/ui";
 import type { PublicInvitationPayload } from "@/lib/public-invitation-server";
 import { InvitationRenderer } from "./InvitationRenderer";
+import { InvitationExperience } from "./InvitationExperience";
 import { RSVPFormCard } from "./RSVPFormCard";
 
 interface PublicInvitationViewProps {
@@ -165,6 +166,12 @@ export function PublicInvitationView({
         )}
 
         <div className={!canShareAndPrint ? "print:hidden" : undefined}>
+          <InvitationExperience
+            design={payload.invitation.designDocument}
+            names={(payload.event.hostNames ?? []).join(locale === "bn" ? " ও " : " & ")}
+            guestName={payload.guestContext?.group.groupName}
+            locale={locale}
+          >
           <InvitationRenderer
             design={payload.invitation.designDocument}
             eventMeta={{
@@ -189,6 +196,7 @@ export function PublicInvitationView({
               ) : undefined
             }
           />
+          </InvitationExperience>
         </div>
       </div>
     </div>
