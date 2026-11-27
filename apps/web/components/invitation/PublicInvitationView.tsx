@@ -134,7 +134,7 @@ export function PublicInvitationView({
 
   return (
     <div className="min-h-screen bg-background py-6 sm:py-10 px-3 sm:px-6 print:bg-white print:p-0">
-      <div className="max-w-2xl mx-auto space-y-4">
+      <div className="max-w-[440px] mx-auto space-y-4">
         {/* Utility bar — visible only to the event creator and authorised inviters */}
         {canShareAndPrint && (
           <div className="no-print flex items-center justify-between gap-2 px-1">

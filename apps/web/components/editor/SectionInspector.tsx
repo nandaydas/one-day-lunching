@@ -32,6 +32,7 @@ import {
   TabsTrigger,
   Textarea,
 } from "@nimantro/ui";
+import { PhotoUploader } from "./PhotoUploader";
 import { useLocale } from "@/hooks/useLocale";
 
 const LONG_TEXT_KEYS = new Set([
@@ -46,7 +47,7 @@ const LONG_TEXT_KEYS = new Set([
   "chapter3Detail",
 ]);
 const PLAIN_STRING_KEYS = new Set(["targetDate", "mapsUrl", "phone", "artworkUrl"]);
-const HIDDEN_CONTENT_KEYS = new Set(["storyType"]);
+const HIDDEN_CONTENT_KEYS = new Set(["storyType", "photoUrl"]);
 
 function isLocalisedObject(val: unknown): val is LocalisedString {
   return Boolean(val && typeof val === "object" && !Array.isArray(val));
@@ -62,9 +63,11 @@ function formatFieldLabel(key: string): string {
 export function SectionInspector({
   section,
   invitationLanguage,
+  eventId,
 }: {
   section: InvitationSection;
   invitationLanguage: Language;
+  eventId: string;
 }) {
   const {
     mode,
@@ -167,6 +170,31 @@ export function SectionInspector({
           <p className="text-xs text-muted-foreground">
             {t("editor.noEditableFields")}
           </p>
+        )}
+
+        {section.type === "hero" && (
+          <PhotoUploader
+            eventId={eventId}
+            label="Couple / host photo (replaces the artwork)"
+            max={1}
+            value={typeof section.content.photoUrl === "string" && section.content.photoUrl ? [section.content.photoUrl] : []}
+            onChange={(urls) => {
+              updateSectionContent(section.id, { photoUrl: urls[0] ?? "" });
+              pushHistory("Change hero photo");
+            }}
+          />
+        )}
+        {section.type === "gallery" && (
+          <PhotoUploader
+            eventId={eventId}
+            label="Gallery photos"
+            max={12}
+            value={Array.isArray(section.content.images) ? (section.content.images as string[]) : []}
+            onChange={(urls) => {
+              updateSectionContent(section.id, { images: urls } as Partial<InvitationSection["content"]>);
+              pushHistory("Change gallery photos");
+            }}
+          />
         )}
 
         {contentEntries.map(([key, value]) => {

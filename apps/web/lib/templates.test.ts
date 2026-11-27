@@ -30,6 +30,22 @@ describe("web template catalog", () => {
   });
 });
 
+describe("withGallery", () => {
+  it("adds a gallery after the story to old invitations and leaves others alone", async () => {
+    const { BUNDLED_TEMPLATES, withGallery } = await import("./templates");
+    const { templateToDesignDocument } = await import("@nimantro/invitation-engine");
+    const full = templateToDesignDocument(BUNDLED_TEMPLATES[0]);
+    expect(withGallery(full)).toBe(full);
+
+    const old = { ...full, sections: full.sections.filter((s) => s.type !== "gallery") };
+    const fixed = withGallery(old);
+    const types = fixed.sections.map((s) => s.type);
+    expect(types.filter((t) => t === "gallery")).toHaveLength(1);
+    expect(types.indexOf("gallery")).toBe(types.indexOf("story") + 1);
+    expect(fixed.sections.map((s) => s.order)).toEqual(fixed.sections.map((_, i) => i));
+  });
+});
+
 describe("web server-crypto", () => {
   it("verifies password hashes and deterministic sha256", () => {
     const h = hashPassword("nimantro-pass");

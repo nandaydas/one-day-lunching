@@ -42,14 +42,21 @@ service firebase.storage {
 
     // ─── Event assets ─────────────────────────────────────────
 
+    // Only the event owner or its members may add/remove invitation photos.
+    // Guests view them through download URLs, which carry their own access token.
+    function canEditEvent(eventId) {
+      return signedIn() && (
+        firestore.get(/databases/(default)/documents/events/$(eventId)).data.ownerId == uid()
+        || firestore.exists(/databases/(default)/documents/events/$(eventId)/members/$(uid()))
+      );
+    }
+
     match /events/{eventId}/assets/{filename} {
-      // Owners and members can read; write is restricted to managers
-      // We use Cloud Functions to verify event membership for reads from public invitations
       allow read: if signedIn();
-      allow create, update: if signedIn()
+      allow create, update: if canEditEvent(eventId)
         && isValidImageType()
         && maxSizeMB(10);
-      allow delete: if signedIn();
+      allow delete: if canEditEvent(eventId);
     }
 
     // ─── Event exports (download only, written by Cloud Run) ──

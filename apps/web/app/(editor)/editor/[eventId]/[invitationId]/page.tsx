@@ -16,16 +16,17 @@ import {
   Copy,
   ExternalLink,
   Globe,
-  Monitor,
   Plus,
   Printer,
   Redo2,
   Save,
   Share2,
-  Smartphone,
-  Tablet,
   Trash2,
   Undo2,
+  LayoutList,
+  Palette,
+  Pencil,
+  X,
 } from "lucide-react";
 import { useEditorStore } from "@nimantro/editor";
 import { SECTION_CATALOG } from "@nimantro/invitation-engine";
@@ -62,6 +63,7 @@ import { SectionInspector } from "@/components/editor/SectionInspector";
 import { ThemeEditorPanel } from "@/components/editor/ThemeEditorPanel";
 import { useLocale } from "@/hooks/useLocale";
 import { getClientDb, isFirebaseClientConfigured } from "@/lib/firebase-client";
+import { withGallery } from "@/lib/templates";
 
 export default function InvitationEditorPage() {
   const params = useParams<{ eventId: string; invitationId: string }>();
@@ -71,12 +73,10 @@ export default function InvitationEditorPage() {
   const {
     design,
     activeSectionId,
-    previewDevice,
     isDirty,
     isSaving,
     initialise,
     setActiveSection,
-    setPreviewDevice,
     toggleSectionEnabled,
     moveSectionUp,
     moveSectionDown,
@@ -94,6 +94,8 @@ export default function InvitationEditorPage() {
 
   const [invitation, setInvitation] = React.useState<InvitationDocument | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const [leftTab, setLeftTab] = React.useState("sections");
+  const [mobilePanel, setMobilePanel] = React.useState<null | "sections" | "theme" | "edit">(null);
   const [eventMeta, setEventMeta] = React.useState<PublicEventMeta | undefined>();
   const [previewLocale, setPreviewLocale] = React.useState<"bn" | "en">("bn");
   const [addDrawerOpen, setAddDrawerOpen] = React.useState(false);
@@ -136,7 +138,8 @@ export default function InvitationEditorPage() {
           });
         }
         if (invSnap.exists()) {
-          const inv = { id: invSnap.id, ...invSnap.data() } as InvitationDocument;
+          const raw = { id: invSnap.id, ...invSnap.data() } as InvitationDocument;
+          const inv = { ...raw, designDocument: withGallery(raw.designDocument) };
           setInvitation(inv);
           initialise(inv.designDocument);
           setSlug(inv.slug || generateSlug(inv.title));
@@ -263,12 +266,189 @@ export default function InvitationEditorPage() {
   const activeSection =
     design.sections.find((s) => s.id === activeSectionId) ?? design.sections[0] ?? null;
 
-  const canvasMaxWidth =
-    previewDevice === "mobile"
-      ? "max-w-[390px]"
-      : previewDevice === "tablet"
-      ? "max-w-[768px]"
-      : "max-w-3xl";
+
+  const leftPanel = (
+    <Tabs value={leftTab} onValueChange={setLeftTab} className="flex flex-col h-full">
+      <TabsList className="grid grid-cols-2 w-full">
+        <TabsTrigger value="sections">{t("editor.sections")}</TabsTrigger>
+        <TabsTrigger value="theme">{t("editor.theme")}</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="sections" className="flex-1 space-y-2 overflow-y-auto">
+        <div className="flex items-center justify-between px-1 pb-1">
+          <span className="text-xs font-semibold text-muted-foreground">
+            {design.sections.length} {t("editor.sections")}
+          </span>
+          <Dialog open={addDrawerOpen} onOpenChange={setAddDrawerOpen}>
+            <DialogTrigger asChild>
+              <Button type="button" size="sm" variant="outline" className="h-7 text-xs">
+                <Plus className="h-3 w-3" />
+                {t("editor.add")}
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>{t("editor.addSectionTitle")}</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-2">
+                {SECTION_CATALOG.map((item) => (
+                  <button
+                    key={item.type}
+                    type="button"
+                    onClick={() => {
+                      const sec = item.createDefaultSection(design.sections.length);
+                      addSection(sec);
+                      setActiveSection(sec.id);
+                      pushHistory(`Add ${item.type} section`);
+                      setAddDrawerOpen(false);
+                    }}
+                    className="flex flex-col items-start rounded-xl border border-border p-3 text-left hover:border-primary/50 hover:bg-muted/40 transition-colors"
+                  >
+                    <span className="text-sm font-semibold">
+                      {uiLocale === "bn" ? item.label.bn : item.label.en}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {item.description}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        {design.sections.map((sec, index) => {
+          const selected = activeSection?.id === sec.id;
+          const catalogMatch = SECTION_CATALOG.find((c) => c.type === sec.type);
+          const sectionLabel =
+            uiLocale === "bn" && catalogMatch
+              ? catalogMatch.label.bn
+              : catalogMatch?.label.en ?? sec.type;
+
+          return (
+            <div
+              key={sec.id}
+              onClick={() => {
+          setActiveSection(sec.id);
+          if (mobilePanel) setMobilePanel("edit");
+        }}
+              className={`rounded-xl border p-2.5 cursor-pointer transition-colors ${
+                selected
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:bg-muted/50"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold truncate">
+                  {sectionLabel}
+                </span>
+                <Switch
+                  checked={sec.enabled}
+                  onCheckedChange={() => {
+                    toggleSectionEnabled(sec.id);
+                    pushHistory(`Toggle ${sec.type}`);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label={`Toggle ${sec.type}`}
+                />
+              </div>
+              <div className="mt-2 flex items-center gap-1">
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  className="h-6 w-6"
+                  disabled={index === 0}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    moveSectionUp(sec.id);
+                    pushHistory("Move section up");
+                  }}
+                  title="Move up"
+                >
+                  <ArrowUp className="h-3 w-3" />
+                </Button>
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  className="h-6 w-6"
+                  disabled={index === design.sections.length - 1}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    moveSectionDown(sec.id);
+                    pushHistory("Move section down");
+                  }}
+                  title="Move down"
+                >
+                  <ArrowDown className="h-3 w-3" />
+                </Button>
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  className="h-6 w-6"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    duplicateSection(sec.id);
+                    pushHistory("Duplicate section");
+                  }}
+                  title="Duplicate"
+                >
+                  <Copy className="h-3 w-3" />
+                </Button>
+                {design.sections.length > 1 && (
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant="ghost"
+                    className="h-6 w-6 text-destructive ml-auto"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeSection(sec.id);
+                      pushHistory("Remove section");
+                    }}
+                    title="Remove"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </TabsContent>
+
+      <TabsContent value="theme" className="overflow-y-auto pr-1">
+        <ThemeEditorPanel />
+      </TabsContent>
+    </Tabs>
+  );
+
+  const inspectorPanel = (
+    <>
+    {activeSection ? (
+      <div className="space-y-3 h-full flex flex-col">
+        <div className="flex items-center justify-between px-1">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {t("editor.editing")}: {activeSection.type}
+          </span>
+        </div>
+        <div className="flex-1 min-h-0">
+          <SectionInspector
+            section={activeSection}
+            invitationLanguage={design.language}
+            eventId={eventId}
+          />
+        </div>
+      </div>
+    ) : (
+      <p className="text-xs text-muted-foreground p-4 text-center">
+        {t("editor.selectSectionHint")}
+      </p>
+    )}
+    </>
+  );
 
   return (
     <div className="flex h-screen flex-col bg-background overflow-hidden print:h-auto print:overflow-visible print:block">
@@ -313,35 +493,6 @@ export default function InvitationEditorPage() {
             <Redo2 className="h-4 w-4" />
           </Button>
 
-          <div className="mx-2 h-5 w-px bg-border" />
-
-          <Button
-            type="button"
-            variant={previewDevice === "mobile" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setPreviewDevice("mobile")}
-            title="Mobile view"
-          >
-            <Smartphone className="h-4 w-4" />
-          </Button>
-          <Button
-            type="button"
-            variant={previewDevice === "tablet" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setPreviewDevice("tablet")}
-            title="Tablet view"
-          >
-            <Tablet className="h-4 w-4" />
-          </Button>
-          <Button
-            type="button"
-            variant={previewDevice === "desktop" ? "secondary" : "ghost"}
-            size="icon"
-            onClick={() => setPreviewDevice("desktop")}
-            title="Desktop view"
-          >
-            <Monitor className="h-4 w-4" />
-          </Button>
 
           <div className="mx-2 h-5 w-px bg-border" />
 
@@ -561,163 +712,13 @@ export default function InvitationEditorPage() {
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-[270px_1fr_320px] min-h-0 print:block">
         {/* Left: Sections + Theme */}
         <aside className="no-print hidden lg:flex flex-col border-r border-border bg-card p-3 overflow-y-auto">
-          <Tabs defaultValue="sections" className="flex flex-col h-full">
-            <TabsList className="grid grid-cols-2 w-full">
-              <TabsTrigger value="sections">{t("editor.sections")}</TabsTrigger>
-              <TabsTrigger value="theme">{t("editor.theme")}</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="sections" className="flex-1 space-y-2 overflow-y-auto">
-              <div className="flex items-center justify-between px-1 pb-1">
-                <span className="text-xs font-semibold text-muted-foreground">
-                  {design.sections.length} {t("editor.sections")}
-                </span>
-                <Dialog open={addDrawerOpen} onOpenChange={setAddDrawerOpen}>
-                  <DialogTrigger asChild>
-                    <Button type="button" size="sm" variant="outline" className="h-7 text-xs">
-                      <Plus className="h-3 w-3" />
-                      {t("editor.add")}
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
-                    <DialogHeader>
-                      <DialogTitle>{t("editor.addSectionTitle")}</DialogTitle>
-                    </DialogHeader>
-                    <div className="grid gap-2">
-                      {SECTION_CATALOG.map((item) => (
-                        <button
-                          key={item.type}
-                          type="button"
-                          onClick={() => {
-                            const sec = item.createDefaultSection(design.sections.length);
-                            addSection(sec);
-                            setActiveSection(sec.id);
-                            pushHistory(`Add ${item.type} section`);
-                            setAddDrawerOpen(false);
-                          }}
-                          className="flex flex-col items-start rounded-xl border border-border p-3 text-left hover:border-primary/50 hover:bg-muted/40 transition-colors"
-                        >
-                          <span className="text-sm font-semibold">
-                            {uiLocale === "bn" ? item.label.bn : item.label.en}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {item.description}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {design.sections.map((sec, index) => {
-                const selected = activeSection?.id === sec.id;
-                const catalogMatch = SECTION_CATALOG.find((c) => c.type === sec.type);
-                const sectionLabel =
-                  uiLocale === "bn" && catalogMatch
-                    ? catalogMatch.label.bn
-                    : catalogMatch?.label.en ?? sec.type;
-
-                return (
-                  <div
-                    key={sec.id}
-                    onClick={() => setActiveSection(sec.id)}
-                    className={`rounded-xl border p-2.5 cursor-pointer transition-colors ${
-                      selected
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:bg-muted/50"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-semibold truncate">
-                        {sectionLabel}
-                      </span>
-                      <Switch
-                        checked={sec.enabled}
-                        onCheckedChange={() => {
-                          toggleSectionEnabled(sec.id);
-                          pushHistory(`Toggle ${sec.type}`);
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        aria-label={`Toggle ${sec.type}`}
-                      />
-                    </div>
-                    <div className="mt-2 flex items-center gap-1">
-                      <Button
-                        type="button"
-                        size="icon"
-                        variant="ghost"
-                        className="h-6 w-6"
-                        disabled={index === 0}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveSectionUp(sec.id);
-                          pushHistory("Move section up");
-                        }}
-                        title="Move up"
-                      >
-                        <ArrowUp className="h-3 w-3" />
-                      </Button>
-                      <Button
-                        type="button"
-                        size="icon"
-                        variant="ghost"
-                        className="h-6 w-6"
-                        disabled={index === design.sections.length - 1}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          moveSectionDown(sec.id);
-                          pushHistory("Move section down");
-                        }}
-                        title="Move down"
-                      >
-                        <ArrowDown className="h-3 w-3" />
-                      </Button>
-                      <Button
-                        type="button"
-                        size="icon"
-                        variant="ghost"
-                        className="h-6 w-6"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          duplicateSection(sec.id);
-                          pushHistory("Duplicate section");
-                        }}
-                        title="Duplicate"
-                      >
-                        <Copy className="h-3 w-3" />
-                      </Button>
-                      {design.sections.length > 1 && (
-                        <Button
-                          type="button"
-                          size="icon"
-                          variant="ghost"
-                          className="h-6 w-6 text-destructive ml-auto"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeSection(sec.id);
-                            pushHistory("Remove section");
-                          }}
-                          title="Remove"
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </TabsContent>
-
-            <TabsContent value="theme" className="overflow-y-auto pr-1">
-              <ThemeEditorPanel />
-            </TabsContent>
-          </Tabs>
+          {leftPanel}
         </aside>
 
         {/* Center: Live Canvas */}
-        <main className="overflow-y-auto bg-muted/40 p-4 sm:p-8 flex justify-center print:overflow-visible print:bg-white print:p-0">
-          <div className={`w-full transition-all duration-200 ${canvasMaxWidth} print:max-w-2xl`}>
+        <main className="overflow-y-auto bg-muted/40 p-3 pb-24 sm:p-8 lg:pb-8 flex justify-center print:overflow-visible print:bg-white print:p-0">
+          {/* Invitations are built for phones, so the canvas is always phone-width */}
+          <div className="w-full max-w-[400px] h-fit overflow-hidden rounded-[2rem] border-[6px] border-foreground/85 shadow-xl print:max-w-2xl print:rounded-none print:border-0 print:shadow-none">
             <InvitationRenderer
               design={design}
               eventMeta={eventMeta}
@@ -726,34 +727,59 @@ export default function InvitationEditorPage() {
               interactive={false}
               showLanguageToggle={false}
               activeSectionId={activeSection?.id}
-              onSelectSection={(id) => setActiveSection(id)}
+              onSelectSection={(id) => {
+                setActiveSection(id);
+                if (window.matchMedia("(max-width: 1023px)").matches) setMobilePanel("edit");
+              }}
             />
           </div>
         </main>
 
         {/* Right: Inspector */}
         <aside className="no-print hidden lg:flex flex-col border-l border-border bg-card p-3 overflow-y-auto">
-          {activeSection ? (
-            <div className="space-y-3 h-full flex flex-col">
-              <div className="flex items-center justify-between px-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  {t("editor.editing")}: {activeSection.type}
-                </span>
-              </div>
-              <div className="flex-1 min-h-0">
-                <SectionInspector
-                  section={activeSection}
-                  invitationLanguage={design.language}
-                />
-              </div>
-            </div>
-          ) : (
-            <p className="text-xs text-muted-foreground p-4 text-center">
-              {t("editor.selectSectionHint")}
-            </p>
-          )}
+          {inspectorPanel}
         </aside>
       </div>
+
+      {/* ─── Mobile: bottom bar + sheet (desktop uses the side panes) ─── */}
+      <nav className="no-print lg:hidden fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t bg-card/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
+        {([
+          ["sections", t("editor.sections"), LayoutList],
+          ["theme", t("editor.theme"), Palette],
+          ["edit", t("editor.editing"), Pencil],
+        ] as const).map(([key, label, Icon]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => {
+              if (key !== "edit") setLeftTab(key);
+              setMobilePanel(mobilePanel === key ? null : key);
+            }}
+            className={`flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium ${mobilePanel === key ? "text-primary" : "text-muted-foreground"}`}
+          >
+            <Icon className="h-5 w-5" aria-hidden="true" />
+            {label}
+          </button>
+        ))}
+      </nav>
+      {mobilePanel && (
+        <div className="no-print lg:hidden fixed inset-0 z-40 flex flex-col justify-end bg-black/30" onClick={() => setMobilePanel(null)}>
+          <div
+            role="dialog"
+            aria-label={mobilePanel === "edit" ? t("editor.editing") : t("editor.sections")}
+            className="flex max-h-[75vh] min-h-[45vh] flex-col rounded-t-2xl bg-card p-3 pb-20 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-2 flex items-center justify-between">
+              <span className="mx-auto h-1.5 w-10 rounded-full bg-muted-foreground/30" />
+              <button type="button" aria-label="Close" className="absolute right-4 p-1" onClick={() => setMobilePanel(null)}>
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto">{mobilePanel === "edit" ? inspectorPanel : leftPanel}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
